@@ -55,6 +55,10 @@
     <Compile Include="UserTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{3d132a72-cd29-4ccf-a142-4aae0a1502a6}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{63926af0-c229-4c48-b134-0a645b3f371f}</Project>
       <Name>Utils</Name>

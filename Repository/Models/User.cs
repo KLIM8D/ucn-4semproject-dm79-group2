@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Repository.Models
 {
-    class User
+    public class User
     {
-        public int UserId { get; set; }
-        public string Name { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Ssn { get; set; }
+         public UserDetails UserDetails { get; set; }
+
     }
 }
