@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.User
+namespace UnitTests
 {
-    public class UserLogic
+    public class UserTests
     {
-        //public bool SaveUser(User user)
-        //{
+        public void CreateUser()
+        {
             
-        //}
+        }
     }
 }
