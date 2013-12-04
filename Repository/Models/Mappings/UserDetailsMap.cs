@@ -25,10 +25,6 @@ namespace Repository.Models.Mappings
             this.Property(t => t.PhoneNo).HasColumnName("usr_det-phoneno");
             this.Property(t => t.EMail).HasColumnName("usr_det-email");
             this.Property(t => t.Active).HasColumnName("usr_det-active");
-
-            //Relationships
-            this.HasRequired(t => t.Credentials);
-            this.HasRequired(t => t.Address);
         }
     }
 }

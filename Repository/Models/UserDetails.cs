@@ -11,8 +11,6 @@ namespace Repository.Models
     public class UserDetails
     {
         public int Id { get; set; }
-        public UserAddress Address { get; set; }
-        public SecurityCredentials Credentials { get; set; }
         public string FirstName { get; set; }
         public string SurName { get; set; }
         public string Ssn { get; set; }

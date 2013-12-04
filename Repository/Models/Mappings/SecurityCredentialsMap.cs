@@ -18,6 +18,7 @@ namespace Repository.Models.Mappings
 
             // Table & Column Mappings
             this.ToTable("security_credentials");
+            this.Property(t => t.UserName).HasColumnName("sec_cre-userid");
             this.Property(t => t.Password).HasColumnName("sec_cre-passwd");
             this.Property(t => t.Active).HasColumnName("sec_cre-active");
 
