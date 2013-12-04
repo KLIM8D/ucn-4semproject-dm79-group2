@@ -7,10 +7,11 @@ namespace Repository.Models
     {
         static RKDbContext()
         {
-            Database.SetInitializer<RKDbContext>(null);
+            //Database.SetInitializer<RKDbContext>(null);
         }
 
-        public RKDbContext() : base("RKDbConn")
+        public RKDbContext()
+            : base("PgSqlServices")
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = true;

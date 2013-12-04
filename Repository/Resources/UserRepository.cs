@@ -16,9 +16,12 @@ namespace Repository.Resources
             db = new RKDbContext();
         }
 
-        public IQueryable<User> GetAllUsers()
+        public IQueryable<UserDetails> GetAllUsers()
         {
-            return db.Users.Select(x => new User {UserDetails = x}).AsQueryable();
+            //return db.Users.Select(x => new User {UserDetails = x}).AsQueryable();
+            var ok = db.Users;
+            
+            return ok;
         }
 
     }
