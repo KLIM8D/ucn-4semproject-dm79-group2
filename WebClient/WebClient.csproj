@@ -177,10 +177,6 @@
       <Project>{8f7ac5e0-d3e2-4929-8211-4c9f977f7274}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository\Repository.csproj">
-      <Project>{3d132a72-cd29-4ccf-a142-4aae0a1502a6}</Project>
-      <Name>Repository</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
