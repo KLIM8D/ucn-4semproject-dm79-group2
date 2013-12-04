@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 using BusinessLogic.Resources;
-using Repository.Models;
 
 namespace WebClient.Models
 {

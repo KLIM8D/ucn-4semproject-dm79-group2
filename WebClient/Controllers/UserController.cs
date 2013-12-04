@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using BusinessLogic.Resources;
 using WebClient.Models;
-using Repository.Models;
 
 namespace WebClient.Controllers
 {
@@ -29,31 +28,33 @@ namespace WebClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User
-                                              {
-                                                  UserAddress = new UserAddress()
-                                                                {
-                                                                    Street = model.Street,
-                                                                    Zipcode = new Zipcode()
-                                                                              {
-                                                                                  City = model.City,
-                                                                                  Code = model.ZipCode
-                                                                              }
-                                                                },
-                                                  UserDetails = new UserDetails()
-                                                                {
-                                                                    EMail = model.EMail,
-                                                                    FirstName = model.FirstName,
-                                                                    SurName = model.SurName,
-                                                                    PhoneNo = model.PhoneNo,
-                                                                    Ssn = model.Ssn
-                                                                },
-                                                  SecurityCredentials = new SecurityCredentials()
-                                                                        {
-                                                                            Password = model.Password
-                                                                        }
+                //User user = new User
+                //                              {
+                //                                  UserAddress = new UserAddress()
+                //                                                {
+                //                                                    Street = model.Street,
+                //                                                    Zipcode = new Zipcode()
+                //                                                              {
+                //                                                                  City = model.City,
+                //                                                                  Code = model.ZipCode
+                //                                                              }
+                //                                                },
+                //                                  UserDetails = new UserDetails()
+                //                                                {
+                //                                                    EMail = model.EMail,
+                //                                                    FirstName = model.FirstName,
+                //                                                    SurName = model.SurName,
+                //                                                    PhoneNo = model.PhoneNo,
+                //                                                    Ssn = model.Ssn
+                //                                                },
+                //                                  SecurityCredentials = new SecurityCredentials()
+                //                                                        {
+                //                                                            Password = model.Password
+                //                                                        }
 
-                                              };
+                //                              };
+
+                var user = new Object();
 
                 bool success = new UserLogic().SaveUser(user);
                 if (success)

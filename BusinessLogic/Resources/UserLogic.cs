@@ -1,10 +1,11 @@
-﻿using Repository.Models;
+using System;
+//using Repository.Models;
 
 namespace BusinessLogic.Resources
 {
     public class UserLogic
     {
-        public bool SaveUser(User user)
+        public bool SaveUser(object user)
         {
             //TODO: Add db logic
             //TODO: Handle DB error messages

@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Repository.Models;
+//using Repository.Models;
 
 namespace BusinessLogic.Resources
 {
     public class TravelCardLogic
     {
-        public void OrderNewCard(User user)
+        public void OrderNewCard(object user)
         {
             //TODO: Add db logic
         }

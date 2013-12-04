@@ -1,17 +1,18 @@
 ﻿function loadFile(filename, filetype) {
+    var fileref;
     if (filetype == "js") {
-        var fileref = document.createElement('script')
+        fileref = document.createElement('script')
         fileref.setAttribute("type", "text/javascript")
         fileref.setAttribute("src", filename)
     }
     else if (filetype == "css") {
-        var fileref = document.createElement("link")
+        fileref = document.createElement("link")
         fileref.setAttribute("rel", "stylesheet")
         fileref.setAttribute("type", "text/css")
         fileref.setAttribute("href", filename)
     }
     else if (filetype == "icon") {
-        var fileref = document.createElement("link")
+        fileref = document.createElement("link")
         fileref.setAttribute("rel", "shortcut icon")
         fileref.setAttribute("type", "image/x-icon")
         fileref.setAttribute("href", filename)

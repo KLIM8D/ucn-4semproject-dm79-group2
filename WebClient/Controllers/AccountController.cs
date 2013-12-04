@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using Repository.Models;
 using WebClient.Models;
 
 namespace WebClient.Controllers
