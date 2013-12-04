@@ -20,7 +20,7 @@ namespace Repository.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Configurations.Add(new UserDetailsMap());
 
             base.OnModelCreating(modelBuilder);
         }

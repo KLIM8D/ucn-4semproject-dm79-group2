@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Repository.Models;
 
-namespace Repository.Repositories
+namespace Repository.Resources
 {
     public class UserRepository
     {

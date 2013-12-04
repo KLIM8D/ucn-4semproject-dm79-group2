@@ -56,15 +56,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Mappings\UserMap.cs" />
+    <Compile Include="Models\Mappings\SecurityCredentialsMap.cs" />
+    <Compile Include="Models\Mappings\SecurityGroupMap.cs" />
+    <Compile Include="Models\Mappings\UserAddressMap.cs" />
+    <Compile Include="Models\Mappings\UserDetailsMap.cs" />
+    <Compile Include="Models\Mappings\ZipcodeMap.cs" />
     <Compile Include="Models\RKDbContext.cs" />
+    <Compile Include="Models\SecurityCredentials.cs" />
+    <Compile Include="Models\SecurityGroup.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserAddress.cs" />
     <Compile Include="Models\UserDetails.cs" />
+    <Compile Include="Models\Zipcode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Resources\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

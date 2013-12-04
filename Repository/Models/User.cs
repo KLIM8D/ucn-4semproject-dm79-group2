@@ -8,7 +8,8 @@ namespace Repository.Models
 {
     public class User
     {
-         public UserDetails UserDetails { get; set; }
-
+        public UserDetails UserDetails { get; set; }
+        public UserAddress UserAddress { get; set; }
+        public SecurityCredentials SecurityCredentials { get; set; }
     }
 }
