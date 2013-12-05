@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dm79_2Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="dm79_2ModelStoreContainer">
+          <EntitySet Name="card_issued" EntityType="dm79_2Model.Store.card_issued" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="card_retracted" EntityType="dm79_2Model.Store.card_retracted" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Cities" EntityType="dm79_2Model.Store.Cities" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="geo_zipcodes" EntityType="dm79_2Model.Store.geo_zipcodes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="security_credentials" EntityType="dm79_2Model.Store.security_credentials" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="security_groups" EntityType="dm79_2Model.Store.security_groups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="user_address" EntityType="dm79_2Model.Store.user_address" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="user_details" EntityType="dm79_2Model.Store.user_details" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="geo_zip-usr_adr" Association="dm79_2Model.Store.geo_zip-usr_adr">
+            <End Role="geo_zipcodes" EntitySet="geo_zipcodes" />
+            <End Role="user_address" EntitySet="user_address" />
+          </AssociationSet>
+          <AssociationSet Name="sec_cre-usr-det" Association="dm79_2Model.Store.sec_cre-usr-det">
+            <End Role="security_credentials" EntitySet="security_credentials" />
+            <End Role="user_details" EntitySet="user_details" />
+          </AssociationSet>
+          <AssociationSet Name="sec_gro-sec_cre" Association="dm79_2Model.Store.sec_gro-sec_cre">
+            <End Role="security_groups" EntitySet="security_groups" />
+            <End Role="security_credentials" EntitySet="security_credentials" />
+          </AssociationSet>
+          <AssociationSet Name="usr_det-car_iss" Association="dm79_2Model.Store.usr_det-car_iss">
+            <End Role="user_details" EntitySet="user_details" />
+            <End Role="card_issued" EntitySet="card_issued" />
+          </AssociationSet>
+          <AssociationSet Name="usr_det-car_ret" Association="dm79_2Model.Store.usr_det-car_ret">
+            <End Role="user_details" EntitySet="user_details" />
+            <End Role="card_retracted" EntitySet="card_retracted" />
+          </AssociationSet>
+          <AssociationSet Name="usr_det-usr_adr" Association="dm79_2Model.Store.usr_det-usr_adr">
+            <End Role="user_details" EntitySet="user_details" />
+            <End Role="user_address" EntitySet="user_address" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="card_issued">
+          <Key>
+            <PropertyRef Name="car_iss-id" />
+          </Key>
+          <Property Name="car_iss-id" Type="int" Nullable="false" />
+          <Property Name="usr_det-id" Type="int" Nullable="false" />
+          <Property Name="car_iss-no" Type="int" Nullable="false" />
+          <Property Name="car_iss-timestamp" Type="datetime" Nullable="false" />
+          <Property Name="car_iss-active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="card_retracted">
+          <Key>
+            <PropertyRef Name="car_ret-id" />
+          </Key>
+          <Property Name="car_ret-id" Type="int" Nullable="false" />
+          <Property Name="usr_det-id" Type="int" Nullable="false" />
+          <Property Name="car_ret-no" Type="int" Nullable="false" />
+          <Property Name="car_ret-timestamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="cityId" />
+          </Key>
+          <Property Name="cityId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="cityName" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="zipCode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="geo_zipcodes">
+          <Key>
+            <PropertyRef Name="geo_zip-id" />
+          </Key>
+          <Property Name="geo_zip-id" Type="int" Nullable="false" />
+          <Property Name="geo_zip-code" Type="int" Nullable="false" />
+          <Property Name="geo_zip-city" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="security_credentials">
+          <Key>
+            <PropertyRef Name="sec_cre-id" />
+          </Key>
+          <Property Name="sec_cre-id" Type="int" Nullable="false" />
+          <Property Name="sec_gro-id" Type="int" Nullable="false" />
+          <Property Name="sec_cre-uname" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="sec_cre-passwd" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="sec_cre-timestamp" Type="datetime" Nullable="false" />
+          <Property Name="sec_cre-active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="security_groups">
+          <Key>
+            <PropertyRef Name="sec_gro-id" />
+          </Key>
+          <Property Name="sec_gro-id" Type="int" Nullable="false" />
+          <Property Name="sec_gro-title" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="sec_gro-timestamp" Type="datetime" Nullable="false" />
+          <Property Name="sec_gro-active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_address">
+          <Key>
+            <PropertyRef Name="usr_adr-id" />
+          </Key>
+          <Property Name="usr_adr-id" Type="int" Nullable="false" />
+          <Property Name="usr_det-id" Type="int" Nullable="false" />
+          <Property Name="geo_zip.id" Type="int" Nullable="false" />
+          <Property Name="usr_det-street" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="user_details">
+          <Key>
+            <PropertyRef Name="usr_det-id" />
+          </Key>
+          <Property Name="usr_det-id" Type="int" Nullable="false" />
+          <Property Name="sec_cre-id" Type="int" Nullable="false" />
+          <Property Name="usr_det-fname" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="usr_det-lname" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="usr_det-ssn" Type="bigint" Nullable="false" />
+          <Property Name="usr_det-phonono" Type="int" Nullable="false" />
+          <Property Name="usr_det-email" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="usr_det-timestamp" Type="datetime" Nullable="false" />
+          <Property Name="usr_det-active" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="geo_zip-usr_adr">
+          <End Role="geo_zipcodes" Type="dm79_2Model.Store.geo_zipcodes" Multiplicity="1" />
+          <End Role="user_address" Type="dm79_2Model.Store.user_address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="geo_zipcodes">
+              <PropertyRef Name="geo_zip-id" />
+            </Principal>
+            <Dependent Role="user_address">
+              <PropertyRef Name="geo_zip.id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sec_cre-usr-det">
+          <End Role="security_credentials" Type="dm79_2Model.Store.security_credentials" Multiplicity="1" />
+          <End Role="user_details" Type="dm79_2Model.Store.user_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="security_credentials">
+              <PropertyRef Name="sec_cre-id" />
+            </Principal>
+            <Dependent Role="user_details">
+              <PropertyRef Name="sec_cre-id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sec_gro-sec_cre">
+          <End Role="security_groups" Type="dm79_2Model.Store.security_groups" Multiplicity="1" />
+          <End Role="security_credentials" Type="dm79_2Model.Store.security_credentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="security_groups">
+              <PropertyRef Name="sec_gro-id" />
+            </Principal>
+            <Dependent Role="security_credentials">
+              <PropertyRef Name="sec_gro-id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usr_det-car_iss">
+          <End Role="user_details" Type="dm79_2Model.Store.user_details" Multiplicity="1" />
+          <End Role="card_issued" Type="dm79_2Model.Store.card_issued" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_details">
+              <PropertyRef Name="usr_det-id" />
+            </Principal>
+            <Dependent Role="card_issued">
+              <PropertyRef Name="usr_det-id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usr_det-car_ret">
+          <End Role="user_details" Type="dm79_2Model.Store.user_details" Multiplicity="1" />
+          <End Role="card_retracted" Type="dm79_2Model.Store.card_retracted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_details">
+              <PropertyRef Name="usr_det-id" />
+            </Principal>
+            <Dependent Role="card_retracted">
+              <PropertyRef Name="usr_det-id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usr_det-usr_adr">
+          <End Role="user_details" Type="dm79_2Model.Store.user_details" Multiplicity="1" />
+          <End Role="user_address" Type="dm79_2Model.Store.user_address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_details">
+              <PropertyRef Name="usr_det-id" />
+            </Principal>
+            <Dependent Role="user_address">
+              <PropertyRef Name="usr_det-id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RKDataModels" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RKConn" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="card_issued" EntityType="RKDataModels.card_issued" />
+          <EntitySet Name="card_retracted" EntityType="RKDataModels.card_retracted" />
+          <EntitySet Name="Cities" EntityType="RKDataModels.Cities" />
+          <EntitySet Name="geo_zipcodes" EntityType="RKDataModels.geo_zipcodes" />
+          <EntitySet Name="security_credentials" EntityType="RKDataModels.security_credentials" />
+          <EntitySet Name="security_groups" EntityType="RKDataModels.security_groups" />
+          <EntitySet Name="user_address" EntityType="RKDataModels.user_address" />
+          <EntitySet Name="user_details" EntityType="RKDataModels.user_details" />
+          <AssociationSet Name="usr_det_car_iss" Association="RKDataModels.usr_det_car_iss">
+            <End Role="user_details" EntitySet="user_details" />
+            <End Role="card_issued" EntitySet="card_issued" />
+          </AssociationSet>
+          <AssociationSet Name="usr_det_car_ret" Association="RKDataModels.usr_det_car_ret">
+            <End Role="user_details" EntitySet="user_details" />
+            <End Role="card_retracted" EntitySet="card_retracted" />
+          </AssociationSet>
+          <AssociationSet Name="geo_zip_usr_adr" Association="RKDataModels.geo_zip_usr_adr">
+            <End Role="geo_zipcodes" EntitySet="geo_zipcodes" />
+            <End Role="user_address" EntitySet="user_address" />
+          </AssociationSet>
+          <AssociationSet Name="sec_cre_usr_det" Association="RKDataModels.sec_cre_usr_det">
+            <End Role="security_credentials" EntitySet="security_credentials" />
+            <End Role="user_details" EntitySet="user_details" />
+          </AssociationSet>
+          <AssociationSet Name="sec_gro_sec_cre" Association="RKDataModels.sec_gro_sec_cre">
+            <End Role="security_groups" EntitySet="security_groups" />
+            <End Role="security_credentials" EntitySet="security_credentials" />
+          </AssociationSet>
+          <AssociationSet Name="usr_det_usr_adr" Association="RKDataModels.usr_det_usr_adr">
+            <End Role="user_details" EntitySet="user_details" />
+            <End Role="user_address" EntitySet="user_address" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="card_issued">
+          <Key>
+            <PropertyRef Name="car_iss_id" />
+          </Key>
+          <Property Name="car_iss_id" Type="Int32" Nullable="false" />
+          <Property Name="usr_det_id" Type="Int32" Nullable="false" />
+          <Property Name="car_iss_no" Type="Int32" Nullable="false" />
+          <Property Name="car_iss_timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="car_iss_active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="user_details" Relationship="RKDataModels.usr_det_car_iss" FromRole="card_issued" ToRole="user_details" />
+        </EntityType>
+        <EntityType Name="card_retracted">
+          <Key>
+            <PropertyRef Name="car_ret_id" />
+          </Key>
+          <Property Name="car_ret_id" Type="Int32" Nullable="false" />
+          <Property Name="usr_det_id" Type="Int32" Nullable="false" />
+          <Property Name="car_ret_no" Type="Int32" Nullable="false" />
+          <Property Name="car_ret_timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="user_details" Relationship="RKDataModels.usr_det_car_ret" FromRole="card_retracted" ToRole="user_details" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="cityId" />
+          </Key>
+          <Property Name="cityId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="cityName" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="zipCode" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="geo_zipcodes">
+          <Key>
+            <PropertyRef Name="geo_zip_id" />
+          </Key>
+          <Property Name="geo_zip_id" Type="Int32" Nullable="false" />
+          <Property Name="geo_zip_code" Type="Int32" Nullable="false" />
+          <Property Name="geo_zip_city" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="user_address" Relationship="RKDataModels.geo_zip_usr_adr" FromRole="geo_zipcodes" ToRole="user_address" />
+        </EntityType>
+        <EntityType Name="security_credentials">
+          <Key>
+            <PropertyRef Name="sec_cre_id" />
+          </Key>
+          <Property Name="sec_cre_id" Type="Int32" Nullable="false" />
+          <Property Name="sec_gro_id" Type="Int32" Nullable="false" />
+          <Property Name="sec_cre_uname" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="sec_cre_passwd" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="sec_cre_timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sec_cre_active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="user_details" Relationship="RKDataModels.sec_cre_usr_det" FromRole="security_credentials" ToRole="user_details" />
+          <NavigationProperty Name="security_groups" Relationship="RKDataModels.sec_gro_sec_cre" FromRole="security_credentials" ToRole="security_groups" />
+        </EntityType>
+        <EntityType Name="security_groups">
+          <Key>
+            <PropertyRef Name="sec_gro_id" />
+          </Key>
+          <Property Name="sec_gro_id" Type="Int32" Nullable="false" />
+          <Property Name="sec_gro_title" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="sec_gro_timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sec_gro_active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="security_credentials" Relationship="RKDataModels.sec_gro_sec_cre" FromRole="security_groups" ToRole="security_credentials" />
+        </EntityType>
+        <EntityType Name="user_address">
+          <Key>
+            <PropertyRef Name="usr_adr_id" />
+          </Key>
+          <Property Name="usr_adr_id" Type="Int32" Nullable="false" />
+          <Property Name="usr_det_id" Type="Int32" Nullable="false" />
+          <Property Name="geo_zip_id" Type="Int32" Nullable="false" />
+          <Property Name="usr_det_street" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="geo_zipcodes" Relationship="RKDataModels.geo_zip_usr_adr" FromRole="user_address" ToRole="geo_zipcodes" />
+          <NavigationProperty Name="user_details" Relationship="RKDataModels.usr_det_usr_adr" FromRole="user_address" ToRole="user_details" />
+        </EntityType>
+        <EntityType Name="user_details">
+          <Key>
+            <PropertyRef Name="usr_det_id" />
+          </Key>
+          <Property Name="usr_det_id" Type="Int32" Nullable="false" />
+          <Property Name="sec_cre_id" Type="Int32" Nullable="false" />
+          <Property Name="usr_det_fname" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="usr_det_lname" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="usr_det_ssn" Type="Int64" Nullable="false" />
+          <Property Name="usr_det_phonono" Type="Int32" Nullable="false" />
+          <Property Name="usr_det_email" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="usr_det_timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="usr_det_active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="card_issued" Relationship="RKDataModels.usr_det_car_iss" FromRole="user_details" ToRole="card_issued" />
+          <NavigationProperty Name="card_retracted" Relationship="RKDataModels.usr_det_car_ret" FromRole="user_details" ToRole="card_retracted" />
+          <NavigationProperty Name="security_credentials" Relationship="RKDataModels.sec_cre_usr_det" FromRole="user_details" ToRole="security_credentials" />
+          <NavigationProperty Name="user_address" Relationship="RKDataModels.usr_det_usr_adr" FromRole="user_details" ToRole="user_address" />
+        </EntityType>
+        <Association Name="usr_det_car_iss">
+          <End Role="user_details" Type="RKDataModels.user_details" Multiplicity="1" />
+          <End Role="card_issued" Type="RKDataModels.card_issued" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_details">
+              <PropertyRef Name="usr_det_id" />
+            </Principal>
+            <Dependent Role="card_issued">
+              <PropertyRef Name="usr_det_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usr_det_car_ret">
+          <End Role="user_details" Type="RKDataModels.user_details" Multiplicity="1" />
+          <End Role="card_retracted" Type="RKDataModels.card_retracted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_details">
+              <PropertyRef Name="usr_det_id" />
+            </Principal>
+            <Dependent Role="card_retracted">
+              <PropertyRef Name="usr_det_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="geo_zip_usr_adr">
+          <End Role="geo_zipcodes" Type="RKDataModels.geo_zipcodes" Multiplicity="1" />
+          <End Role="user_address" Type="RKDataModels.user_address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="geo_zipcodes">
+              <PropertyRef Name="geo_zip_id" />
+            </Principal>
+            <Dependent Role="user_address">
+              <PropertyRef Name="geo_zip_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sec_cre_usr_det">
+          <End Role="security_credentials" Type="RKDataModels.security_credentials" Multiplicity="1" />
+          <End Role="user_details" Type="RKDataModels.user_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="security_credentials">
+              <PropertyRef Name="sec_cre_id" />
+            </Principal>
+            <Dependent Role="user_details">
+              <PropertyRef Name="sec_cre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sec_gro_sec_cre">
+          <End Role="security_groups" Type="RKDataModels.security_groups" Multiplicity="1" />
+          <End Role="security_credentials" Type="RKDataModels.security_credentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="security_groups">
+              <PropertyRef Name="sec_gro_id" />
+            </Principal>
+            <Dependent Role="security_credentials">
+              <PropertyRef Name="sec_gro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usr_det_usr_adr">
+          <End Role="user_details" Type="RKDataModels.user_details" Multiplicity="1" />
+          <End Role="user_address" Type="RKDataModels.user_address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_details">
+              <PropertyRef Name="usr_det_id" />
+            </Principal>
+            <Dependent Role="user_address">
+              <PropertyRef Name="usr_det_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dm79_2ModelStoreContainer" CdmEntityContainer="RKConn">
+          <EntitySetMapping Name="card_issued">
+            <EntityTypeMapping TypeName="RKDataModels.card_issued">
+              <MappingFragment StoreEntitySet="card_issued">
+                <ScalarProperty Name="car_iss_id" ColumnName="car_iss-id" />
+                <ScalarProperty Name="usr_det_id" ColumnName="usr_det-id" />
+                <ScalarProperty Name="car_iss_no" ColumnName="car_iss-no" />
+                <ScalarProperty Name="car_iss_timestamp" ColumnName="car_iss-timestamp" />
+                <ScalarProperty Name="car_iss_active" ColumnName="car_iss-active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="card_retracted">
+            <EntityTypeMapping TypeName="RKDataModels.card_retracted">
+              <MappingFragment StoreEntitySet="card_retracted">
+                <ScalarProperty Name="car_ret_id" ColumnName="car_ret-id" />
+                <ScalarProperty Name="usr_det_id" ColumnName="usr_det-id" />
+                <ScalarProperty Name="car_ret_no" ColumnName="car_ret-no" />
+                <ScalarProperty Name="car_ret_timestamp" ColumnName="car_ret-timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="RKDataModels.Cities">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="cityId" ColumnName="cityId" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="geo_zipcodes">
+            <EntityTypeMapping TypeName="RKDataModels.geo_zipcodes">
+              <MappingFragment StoreEntitySet="geo_zipcodes">
+                <ScalarProperty Name="geo_zip_id" ColumnName="geo_zip-id" />
+                <ScalarProperty Name="geo_zip_code" ColumnName="geo_zip-code" />
+                <ScalarProperty Name="geo_zip_city" ColumnName="geo_zip-city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="security_credentials">
+            <EntityTypeMapping TypeName="RKDataModels.security_credentials">
+              <MappingFragment StoreEntitySet="security_credentials">
+                <ScalarProperty Name="sec_cre_id" ColumnName="sec_cre-id" />
+                <ScalarProperty Name="sec_gro_id" ColumnName="sec_gro-id" />
+                <ScalarProperty Name="sec_cre_uname" ColumnName="sec_cre-uname" />
+                <ScalarProperty Name="sec_cre_passwd" ColumnName="sec_cre-passwd" />
+                <ScalarProperty Name="sec_cre_timestamp" ColumnName="sec_cre-timestamp" />
+                <ScalarProperty Name="sec_cre_active" ColumnName="sec_cre-active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="security_groups">
+            <EntityTypeMapping TypeName="RKDataModels.security_groups">
+              <MappingFragment StoreEntitySet="security_groups">
+                <ScalarProperty Name="sec_gro_id" ColumnName="sec_gro-id" />
+                <ScalarProperty Name="sec_gro_title" ColumnName="sec_gro-title" />
+                <ScalarProperty Name="sec_gro_timestamp" ColumnName="sec_gro-timestamp" />
+                <ScalarProperty Name="sec_gro_active" ColumnName="sec_gro-active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_address">
+            <EntityTypeMapping TypeName="RKDataModels.user_address">
+              <MappingFragment StoreEntitySet="user_address">
+                <ScalarProperty Name="usr_adr_id" ColumnName="usr_adr-id" />
+                <ScalarProperty Name="usr_det_id" ColumnName="usr_det-id" />
+                <ScalarProperty Name="geo_zip_id" ColumnName="geo_zip.id" />
+                <ScalarProperty Name="usr_det_street" ColumnName="usr_det-street" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_details">
+            <EntityTypeMapping TypeName="RKDataModels.user_details">
+              <MappingFragment StoreEntitySet="user_details">
+                <ScalarProperty Name="usr_det_id" ColumnName="usr_det-id" />
+                <ScalarProperty Name="sec_cre_id" ColumnName="sec_cre-id" />
+                <ScalarProperty Name="usr_det_fname" ColumnName="usr_det-fname" />
+                <ScalarProperty Name="usr_det_lname" ColumnName="usr_det-lname" />
+                <ScalarProperty Name="usr_det_ssn" ColumnName="usr_det-ssn" />
+                <ScalarProperty Name="usr_det_phonono" ColumnName="usr_det-phonono" />
+                <ScalarProperty Name="usr_det_email" ColumnName="usr_det-email" />
+                <ScalarProperty Name="usr_det_timestamp" ColumnName="usr_det-timestamp" />
+                <ScalarProperty Name="usr_det_active" ColumnName="usr_det-active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
