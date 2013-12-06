@@ -27,11 +27,15 @@ namespace Repository.Models
     
         public DbSet<card_issued> card_issued { get; set; }
         public DbSet<card_retracted> card_retracted { get; set; }
-        public DbSet<Cities> Cities { get; set; }
         public DbSet<geo_zipcodes> geo_zipcodes { get; set; }
         public DbSet<security_credentials> security_credentials { get; set; }
         public DbSet<security_groups> security_groups { get; set; }
         public DbSet<user_address> user_address { get; set; }
         public DbSet<user_details> user_details { get; set; }
+        public DbSet<routing_operators> routing_operators { get; set; }
+        public DbSet<routing_zone_neighbors> routing_zone_neighbors { get; set; }
+        public DbSet<routing_zones> routing_zones { get; set; }
+        public DbSet<transit_locations> transit_locations { get; set; }
+        public DbSet<transit_type> transit_type { get; set; }
     }
 }

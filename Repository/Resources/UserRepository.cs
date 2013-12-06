@@ -16,9 +16,14 @@ namespace Repository.Resources
             db = new RKConn();
         }
 
-        public IQueryable<user_details> Get()
-        {
-            return db.user_details;
-        }
+        //public IQueryable<> GetAll()
+        //{
+        //    return db.user_details;
+        //}
+
+        //public User GetById(int id)
+        //{
+        //    return;
+        //}
     }
 }

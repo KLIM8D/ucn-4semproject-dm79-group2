@@ -12,10 +12,17 @@ namespace Repository.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cities
+    public partial class transit_type
     {
-        public int cityId { get; set; }
-        public string cityName { get; set; }
-        public int zipCode { get; set; }
+        public transit_type()
+        {
+            this.transit_locations = new HashSet<transit_locations>();
+        }
+    
+        public int tra_typ_id { get; set; }
+        public string tra_typ_title { get; set; }
+        public bool tra_typ_active { get; set; }
+    
+        public virtual ICollection<transit_locations> transit_locations { get; set; }
     }
 }

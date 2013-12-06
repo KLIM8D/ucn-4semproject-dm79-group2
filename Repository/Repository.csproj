@@ -55,9 +55,6 @@
     <Compile Include="Models\card_retracted.cs">
       <DependentUpon>DataModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cities.cs">
-      <DependentUpon>DataModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DataModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -76,10 +73,25 @@
     <Compile Include="Models\geo_zipcodes.cs">
       <DependentUpon>DataModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\routing_operators.cs">
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\routing_zones.cs">
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\routing_zone_neighbors.cs">
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\security_credentials.cs">
       <DependentUpon>DataModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\security_groups.cs">
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\transit_locations.cs">
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\transit_type.cs">
       <DependentUpon>DataModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user_address.cs">

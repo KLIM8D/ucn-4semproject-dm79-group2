@@ -4,19 +4,35 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dm79_2Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dm79_2Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="dm79_2ModelStoreContainer">
           <EntitySet Name="card_issued" EntityType="dm79_2Model.Store.card_issued" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="card_retracted" EntityType="dm79_2Model.Store.card_retracted" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Cities" EntityType="dm79_2Model.Store.Cities" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="geo_zipcodes" EntityType="dm79_2Model.Store.geo_zipcodes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="routing_operators" EntityType="dm79_2Model.Store.routing_operators" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="routing_zone_neighbors" EntityType="dm79_2Model.Store.routing_zone_neighbors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="routing_zones" EntityType="dm79_2Model.Store.routing_zones" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="security_credentials" EntityType="dm79_2Model.Store.security_credentials" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="security_groups" EntityType="dm79_2Model.Store.security_groups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="transit_locations" EntityType="dm79_2Model.Store.transit_locations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="transit_type" EntityType="dm79_2Model.Store.transit_type" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="user_address" EntityType="dm79_2Model.Store.user_address" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="user_details" EntityType="dm79_2Model.Store.user_details" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="geo_zip-usr_adr" Association="dm79_2Model.Store.geo_zip-usr_adr">
             <End Role="geo_zipcodes" EntitySet="geo_zipcodes" />
             <End Role="user_address" EntitySet="user_address" />
+          </AssociationSet>
+          <AssociationSet Name="rot_opt-rot_zon" Association="dm79_2Model.Store.rot_opt-rot_zon">
+            <End Role="routing_operators" EntitySet="routing_operators" />
+            <End Role="routing_zones" EntitySet="routing_zones" />
+          </AssociationSet>
+          <AssociationSet Name="rot_zon-rot_zon-ngr" Association="dm79_2Model.Store.rot_zon-rot_zon-ngr">
+            <End Role="routing_zones" EntitySet="routing_zones" />
+            <End Role="routing_zone_neighbors" EntitySet="routing_zone_neighbors" />
+          </AssociationSet>
+          <AssociationSet Name="rot_zon-tra_loc" Association="dm79_2Model.Store.rot_zon-tra_loc">
+            <End Role="routing_zones" EntitySet="routing_zones" />
+            <End Role="transit_locations" EntitySet="transit_locations" />
           </AssociationSet>
           <AssociationSet Name="sec_cre-usr-det" Association="dm79_2Model.Store.sec_cre-usr-det">
             <End Role="security_credentials" EntitySet="security_credentials" />
@@ -25,6 +41,10 @@
           <AssociationSet Name="sec_gro-sec_cre" Association="dm79_2Model.Store.sec_gro-sec_cre">
             <End Role="security_groups" EntitySet="security_groups" />
             <End Role="security_credentials" EntitySet="security_credentials" />
+          </AssociationSet>
+          <AssociationSet Name="tra_typ-tra_loc" Association="dm79_2Model.Store.tra_typ-tra_loc">
+            <End Role="transit_type" EntitySet="transit_type" />
+            <End Role="transit_locations" EntitySet="transit_locations" />
           </AssociationSet>
           <AssociationSet Name="usr_det-car_iss" Association="dm79_2Model.Store.usr_det-car_iss">
             <End Role="user_details" EntitySet="user_details" />
@@ -43,7 +63,7 @@
           <Key>
             <PropertyRef Name="car_iss-id" />
           </Key>
-          <Property Name="car_iss-id" Type="int" Nullable="false" />
+          <Property Name="car_iss-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="usr_det-id" Type="int" Nullable="false" />
           <Property Name="car_iss-no" Type="int" Nullable="false" />
           <Property Name="car_iss-timestamp" Type="datetime" Nullable="false" />
@@ -53,32 +73,52 @@
           <Key>
             <PropertyRef Name="car_ret-id" />
           </Key>
-          <Property Name="car_ret-id" Type="int" Nullable="false" />
+          <Property Name="car_ret-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="usr_det-id" Type="int" Nullable="false" />
           <Property Name="car_ret-no" Type="int" Nullable="false" />
           <Property Name="car_ret-timestamp" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Cities">
-          <Key>
-            <PropertyRef Name="cityId" />
-          </Key>
-          <Property Name="cityId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="cityName" Type="varchar" Nullable="false" MaxLength="256" />
-          <Property Name="zipCode" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="geo_zipcodes">
           <Key>
             <PropertyRef Name="geo_zip-id" />
           </Key>
-          <Property Name="geo_zip-id" Type="int" Nullable="false" />
+          <Property Name="geo_zip-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="geo_zip-code" Type="int" Nullable="false" />
           <Property Name="geo_zip-city" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="routing_operators">
+          <Key>
+            <PropertyRef Name="rot_opt-id" />
+          </Key>
+          <Property Name="rot_opt-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="rot_opt-no" Type="int" Nullable="false" />
+          <Property Name="rot_opt-title" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="rot_opt-title_full" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="rot_opt-active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="routing_zone_neighbors">
+          <Key>
+            <PropertyRef Name="rot_zon_ngr-id" />
+          </Key>
+          <Property Name="rot_zon_ngr-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="rot_zon-id" Type="int" Nullable="false" />
+          <Property Name="rot_zon_ngr-area" Type="int" Nullable="false" />
+          <Property Name="rot_zon_ngr-active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="routing_zones">
+          <Key>
+            <PropertyRef Name="rot_zon-id" />
+          </Key>
+          <Property Name="rot_zon-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="rot_opt-id" Type="int" Nullable="false" />
+          <Property Name="rot_zon-area_id" Type="int" Nullable="false" />
+          <Property Name="rot_zon-active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="security_credentials">
           <Key>
             <PropertyRef Name="sec_cre-id" />
           </Key>
-          <Property Name="sec_cre-id" Type="int" Nullable="false" />
+          <Property Name="sec_cre-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="sec_gro-id" Type="int" Nullable="false" />
           <Property Name="sec_cre-uname" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="sec_cre-passwd" Type="varchar" Nullable="false" MaxLength="256" />
@@ -89,16 +129,35 @@
           <Key>
             <PropertyRef Name="sec_gro-id" />
           </Key>
-          <Property Name="sec_gro-id" Type="int" Nullable="false" />
+          <Property Name="sec_gro-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="sec_gro-title" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="sec_gro-timestamp" Type="datetime" Nullable="false" />
           <Property Name="sec_gro-active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transit_locations">
+          <Key>
+            <PropertyRef Name="tra_loc-id" />
+          </Key>
+          <Property Name="tra_loc-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tra_typ-id" Type="int" Nullable="false" />
+          <Property Name="rot_zon-id" Type="int" Nullable="false" />
+          <Property Name="tra_loc-area_id" Type="int" Nullable="false" />
+          <Property Name="tra_loc-title" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="tra_loc-active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transit_type">
+          <Key>
+            <PropertyRef Name="tra_typ-id" />
+          </Key>
+          <Property Name="tra_typ-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tra_typ-title" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="tra_typ-active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="user_address">
           <Key>
             <PropertyRef Name="usr_adr-id" />
           </Key>
-          <Property Name="usr_adr-id" Type="int" Nullable="false" />
+          <Property Name="usr_adr-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="usr_det-id" Type="int" Nullable="false" />
           <Property Name="geo_zip.id" Type="int" Nullable="false" />
           <Property Name="usr_det-street" Type="varchar" MaxLength="256" />
@@ -107,7 +166,7 @@
           <Key>
             <PropertyRef Name="usr_det-id" />
           </Key>
-          <Property Name="usr_det-id" Type="int" Nullable="false" />
+          <Property Name="usr_det-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="sec_cre-id" Type="int" Nullable="false" />
           <Property Name="usr_det-fname" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="usr_det-lname" Type="varchar" Nullable="false" MaxLength="256" />
@@ -126,6 +185,42 @@
             </Principal>
             <Dependent Role="user_address">
               <PropertyRef Name="geo_zip.id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rot_opt-rot_zon">
+          <End Role="routing_operators" Type="dm79_2Model.Store.routing_operators" Multiplicity="1" />
+          <End Role="routing_zones" Type="dm79_2Model.Store.routing_zones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="routing_operators">
+              <PropertyRef Name="rot_opt-id" />
+            </Principal>
+            <Dependent Role="routing_zones">
+              <PropertyRef Name="rot_opt-id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rot_zon-rot_zon-ngr">
+          <End Role="routing_zones" Type="dm79_2Model.Store.routing_zones" Multiplicity="1" />
+          <End Role="routing_zone_neighbors" Type="dm79_2Model.Store.routing_zone_neighbors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="routing_zones">
+              <PropertyRef Name="rot_zon-id" />
+            </Principal>
+            <Dependent Role="routing_zone_neighbors">
+              <PropertyRef Name="rot_zon-id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rot_zon-tra_loc">
+          <End Role="routing_zones" Type="dm79_2Model.Store.routing_zones" Multiplicity="1" />
+          <End Role="transit_locations" Type="dm79_2Model.Store.transit_locations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="routing_zones">
+              <PropertyRef Name="rot_zon-id" />
+            </Principal>
+            <Dependent Role="transit_locations">
+              <PropertyRef Name="rot_zon-id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -150,6 +245,18 @@
             </Principal>
             <Dependent Role="security_credentials">
               <PropertyRef Name="sec_gro-id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tra_typ-tra_loc">
+          <End Role="transit_type" Type="dm79_2Model.Store.transit_type" Multiplicity="1" />
+          <End Role="transit_locations" Type="dm79_2Model.Store.transit_locations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transit_type">
+              <PropertyRef Name="tra_typ-id" />
+            </Principal>
+            <Dependent Role="transit_locations">
+              <PropertyRef Name="tra_typ-id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -189,15 +296,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RKDataModels" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="RKConn" p1:LazyLoadingEnabled="true">
           <EntitySet Name="card_issued" EntityType="RKDataModels.card_issued" />
           <EntitySet Name="card_retracted" EntityType="RKDataModels.card_retracted" />
-          <EntitySet Name="Cities" EntityType="RKDataModels.Cities" />
           <EntitySet Name="geo_zipcodes" EntityType="RKDataModels.geo_zipcodes" />
           <EntitySet Name="security_credentials" EntityType="RKDataModels.security_credentials" />
           <EntitySet Name="security_groups" EntityType="RKDataModels.security_groups" />
@@ -227,6 +332,27 @@
             <End Role="user_details" EntitySet="user_details" />
             <End Role="user_address" EntitySet="user_address" />
           </AssociationSet>
+          <EntitySet Name="routing_operators" EntityType="RKDataModels.routing_operators" />
+          <EntitySet Name="routing_zone_neighbors" EntityType="RKDataModels.routing_zone_neighbors" />
+          <EntitySet Name="routing_zones" EntityType="RKDataModels.routing_zones" />
+          <EntitySet Name="transit_locations" EntityType="RKDataModels.transit_locations" />
+          <EntitySet Name="transit_type" EntityType="RKDataModels.transit_type" />
+          <AssociationSet Name="rot_opt_rot_zon" Association="RKDataModels.rot_opt_rot_zon">
+            <End Role="routing_operators" EntitySet="routing_operators" />
+            <End Role="routing_zones" EntitySet="routing_zones" />
+          </AssociationSet>
+          <AssociationSet Name="rot_zon_rot_zon_ngr" Association="RKDataModels.rot_zon_rot_zon_ngr">
+            <End Role="routing_zones" EntitySet="routing_zones" />
+            <End Role="routing_zone_neighbors" EntitySet="routing_zone_neighbors" />
+          </AssociationSet>
+          <AssociationSet Name="rot_zon_tra_loc" Association="RKDataModels.rot_zon_tra_loc">
+            <End Role="routing_zones" EntitySet="routing_zones" />
+            <End Role="transit_locations" EntitySet="transit_locations" />
+          </AssociationSet>
+          <AssociationSet Name="tra_typ_tra_loc" Association="RKDataModels.tra_typ_tra_loc">
+            <End Role="transit_type" EntitySet="transit_type" />
+            <End Role="transit_locations" EntitySet="transit_locations" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="card_issued">
           <Key>
@@ -248,14 +374,6 @@
           <Property Name="car_ret_no" Type="Int32" Nullable="false" />
           <Property Name="car_ret_timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="user_details" Relationship="RKDataModels.usr_det_car_ret" FromRole="card_retracted" ToRole="user_details" />
-        </EntityType>
-        <EntityType Name="Cities">
-          <Key>
-            <PropertyRef Name="cityId" />
-          </Key>
-          <Property Name="cityId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="cityName" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
-          <Property Name="zipCode" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="geo_zipcodes">
           <Key>
@@ -390,6 +508,109 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="routing_operators">
+          <Key>
+            <PropertyRef Name="rot_opt_id" />
+          </Key>
+          <Property Type="Int32" Name="rot_opt_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="rot_opt_no" Nullable="false" />
+          <Property Type="String" Name="rot_opt_title" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="rot_opt_title_full" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="rot_opt_active" Nullable="false" />
+          <NavigationProperty Name="routing_zones" Relationship="RKDataModels.rot_opt_rot_zon" FromRole="routing_operators" ToRole="routing_zones" />
+        </EntityType>
+        <EntityType Name="routing_zone_neighbors">
+          <Key>
+            <PropertyRef Name="rot_zon_ngr_id" />
+          </Key>
+          <Property Type="Int32" Name="rot_zon_ngr_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="rot_zon_id" Nullable="false" />
+          <Property Type="Int32" Name="rot_zon_ngr_area" Nullable="false" />
+          <Property Type="Boolean" Name="rot_zon_ngr_active" Nullable="false" />
+          <NavigationProperty Name="routing_zones" Relationship="RKDataModels.rot_zon_rot_zon_ngr" FromRole="routing_zone_neighbors" ToRole="routing_zones" />
+        </EntityType>
+        <EntityType Name="routing_zones">
+          <Key>
+            <PropertyRef Name="rot_zon_id" />
+          </Key>
+          <Property Type="Int32" Name="rot_zon_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="rot_opt_id" Nullable="false" />
+          <Property Type="Int32" Name="rot_zon_area_id" Nullable="false" />
+          <Property Type="Boolean" Name="rot_zon_active" Nullable="false" />
+          <NavigationProperty Name="routing_operators" Relationship="RKDataModels.rot_opt_rot_zon" FromRole="routing_zones" ToRole="routing_operators" />
+          <NavigationProperty Name="routing_zone_neighbors" Relationship="RKDataModels.rot_zon_rot_zon_ngr" FromRole="routing_zones" ToRole="routing_zone_neighbors" />
+          <NavigationProperty Name="transit_locations" Relationship="RKDataModels.rot_zon_tra_loc" FromRole="routing_zones" ToRole="transit_locations" />
+        </EntityType>
+        <EntityType Name="transit_locations">
+          <Key>
+            <PropertyRef Name="tra_loc_id" />
+          </Key>
+          <Property Type="Int32" Name="tra_loc_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="tra_typ_id" Nullable="false" />
+          <Property Type="Int32" Name="rot_zon_id" Nullable="false" />
+          <Property Type="Int32" Name="tra_loc_area_id" Nullable="false" />
+          <Property Type="String" Name="tra_loc_title" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="tra_loc_active" Nullable="false" />
+          <NavigationProperty Name="routing_zones" Relationship="RKDataModels.rot_zon_tra_loc" FromRole="transit_locations" ToRole="routing_zones" />
+          <NavigationProperty Name="transit_type" Relationship="RKDataModels.tra_typ_tra_loc" FromRole="transit_locations" ToRole="transit_type" />
+        </EntityType>
+        <EntityType Name="transit_type">
+          <Key>
+            <PropertyRef Name="tra_typ_id" />
+          </Key>
+          <Property Type="Int32" Name="tra_typ_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="tra_typ_title" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="tra_typ_active" Nullable="false" />
+          <NavigationProperty Name="transit_locations" Relationship="RKDataModels.tra_typ_tra_loc" FromRole="transit_type" ToRole="transit_locations" />
+        </EntityType>
+        <Association Name="rot_opt_rot_zon">
+          <End Type="RKDataModels.routing_operators" Role="routing_operators" Multiplicity="1" />
+          <End Type="RKDataModels.routing_zones" Role="routing_zones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="routing_operators">
+              <PropertyRef Name="rot_opt_id" />
+            </Principal>
+            <Dependent Role="routing_zones">
+              <PropertyRef Name="rot_opt_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rot_zon_rot_zon_ngr">
+          <End Type="RKDataModels.routing_zones" Role="routing_zones" Multiplicity="1" />
+          <End Type="RKDataModels.routing_zone_neighbors" Role="routing_zone_neighbors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="routing_zones">
+              <PropertyRef Name="rot_zon_id" />
+            </Principal>
+            <Dependent Role="routing_zone_neighbors">
+              <PropertyRef Name="rot_zon_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rot_zon_tra_loc">
+          <End Type="RKDataModels.routing_zones" Role="routing_zones" Multiplicity="1" />
+          <End Type="RKDataModels.transit_locations" Role="transit_locations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="routing_zones">
+              <PropertyRef Name="rot_zon_id" />
+            </Principal>
+            <Dependent Role="transit_locations">
+              <PropertyRef Name="rot_zon_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tra_typ_tra_loc">
+          <End Type="RKDataModels.transit_type" Role="transit_type" Multiplicity="1" />
+          <End Type="RKDataModels.transit_locations" Role="transit_locations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transit_type">
+              <PropertyRef Name="tra_typ_id" />
+            </Principal>
+            <Dependent Role="transit_locations">
+              <PropertyRef Name="tra_typ_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -414,15 +635,6 @@
                 <ScalarProperty Name="usr_det_id" ColumnName="usr_det-id" />
                 <ScalarProperty Name="car_ret_no" ColumnName="car_ret-no" />
                 <ScalarProperty Name="car_ret_timestamp" ColumnName="car_ret-timestamp" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="RKDataModels.Cities">
-              <MappingFragment StoreEntitySet="Cities">
-                <ScalarProperty Name="cityId" ColumnName="cityId" />
-                <ScalarProperty Name="cityName" ColumnName="cityName" />
-                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -479,6 +691,58 @@
                 <ScalarProperty Name="usr_det_email" ColumnName="usr_det-email" />
                 <ScalarProperty Name="usr_det_timestamp" ColumnName="usr_det-timestamp" />
                 <ScalarProperty Name="usr_det_active" ColumnName="usr_det-active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="routing_operators">
+            <EntityTypeMapping TypeName="RKDataModels.routing_operators">
+              <MappingFragment StoreEntitySet="routing_operators">
+                <ScalarProperty Name="rot_opt_active" ColumnName="rot_opt-active" />
+                <ScalarProperty Name="rot_opt_title_full" ColumnName="rot_opt-title_full" />
+                <ScalarProperty Name="rot_opt_title" ColumnName="rot_opt-title" />
+                <ScalarProperty Name="rot_opt_no" ColumnName="rot_opt-no" />
+                <ScalarProperty Name="rot_opt_id" ColumnName="rot_opt-id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="routing_zone_neighbors">
+            <EntityTypeMapping TypeName="RKDataModels.routing_zone_neighbors">
+              <MappingFragment StoreEntitySet="routing_zone_neighbors">
+                <ScalarProperty Name="rot_zon_ngr_active" ColumnName="rot_zon_ngr-active" />
+                <ScalarProperty Name="rot_zon_ngr_area" ColumnName="rot_zon_ngr-area" />
+                <ScalarProperty Name="rot_zon_id" ColumnName="rot_zon-id" />
+                <ScalarProperty Name="rot_zon_ngr_id" ColumnName="rot_zon_ngr-id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="routing_zones">
+            <EntityTypeMapping TypeName="RKDataModels.routing_zones">
+              <MappingFragment StoreEntitySet="routing_zones">
+                <ScalarProperty Name="rot_zon_active" ColumnName="rot_zon-active" />
+                <ScalarProperty Name="rot_zon_area_id" ColumnName="rot_zon-area_id" />
+                <ScalarProperty Name="rot_opt_id" ColumnName="rot_opt-id" />
+                <ScalarProperty Name="rot_zon_id" ColumnName="rot_zon-id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transit_locations">
+            <EntityTypeMapping TypeName="RKDataModels.transit_locations">
+              <MappingFragment StoreEntitySet="transit_locations">
+                <ScalarProperty Name="tra_loc_active" ColumnName="tra_loc-active" />
+                <ScalarProperty Name="tra_loc_title" ColumnName="tra_loc-title" />
+                <ScalarProperty Name="tra_loc_area_id" ColumnName="tra_loc-area_id" />
+                <ScalarProperty Name="rot_zon_id" ColumnName="rot_zon-id" />
+                <ScalarProperty Name="tra_typ_id" ColumnName="tra_typ-id" />
+                <ScalarProperty Name="tra_loc_id" ColumnName="tra_loc-id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transit_type">
+            <EntityTypeMapping TypeName="RKDataModels.transit_type">
+              <MappingFragment StoreEntitySet="transit_type">
+                <ScalarProperty Name="tra_typ_active" ColumnName="tra_typ-active" />
+                <ScalarProperty Name="tra_typ_title" ColumnName="tra_typ-title" />
+                <ScalarProperty Name="tra_typ_id" ColumnName="tra_typ-id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
