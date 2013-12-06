@@ -176,7 +176,7 @@
           <Property Name="sec_cre-id" Type="int" Nullable="false" />
           <Property Name="usr_det-fname" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="usr_det-lname" Type="varchar" Nullable="false" MaxLength="256" />
-          <Property Name="usr_det-ssn" Type="bigint" Nullable="false" />
+          <Property Name="usr_det-ssn" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="usr_det-phoneno" Type="int" Nullable="false" />
           <Property Name="usr_det-email" Type="varchar" Nullable="false" MaxLength="25" />
           <Property Name="usr_det-timestamp" Type="datetime" Nullable="false" />
@@ -399,7 +399,7 @@
             <End Role="vault_withdraws" EntitySet="vault_withdraws" />
           </AssociationSet>
           <FunctionImport Name="GetUserById" ReturnType="Collection(DataModels.User)">
-            <Parameter Name="param1" Mode="InOut" Type="Int32" />
+          <Parameter Name="param1" Mode="InOut" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="card_issued">
@@ -528,7 +528,7 @@
           <Property Name="sec_cre_id" Type="Int32" Nullable="false" />
           <Property Name="usr_det_fname" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
           <Property Name="usr_det_lname" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
-          <Property Name="usr_det_ssn" Type="Int64" Nullable="false" />
+          <Property Name="usr_det_ssn" Type="String" Nullable="false" />
           <Property Name="usr_det_phoneno" Type="Int32" Nullable="false" />
           <Property Name="usr_det_email" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
           <Property Name="usr_det_timestamp" Type="DateTime" Nullable="false" Precision="3" />

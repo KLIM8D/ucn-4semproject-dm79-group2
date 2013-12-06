@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BusinessLogic.Resources;
+using Repository.Models;
 using WebClient.Models;
 
 namespace WebClient.Controllers
@@ -26,39 +27,30 @@ namespace WebClient.Controllers
         [HttpPost]
         public ActionResult CreateUser(UserViewModel model)
         {
+            long mSsn;
             if (ModelState.IsValid)
             {
-                //User user = new User
-                //                              {
-                //                                  UserAddress = new UserAddress()
-                //                                                {
-                //                                                    Street = model.Street,
-                //                                                    Zipcode = new Zipcode()
-                //                                                              {
-                //                                                                  City = model.City,
-                //                                                                  Code = model.ZipCode
-                //                                                              }
-                //                                                },
-                //                                  UserDetails = new UserDetails()
-                //                                                {
-                //                                                    EMail = model.EMail,
-                //                                                    FirstName = model.FirstName,
-                //                                                    SurName = model.SurName,
-                //                                                    PhoneNo = model.PhoneNo,
-                //                                                    Ssn = model.Ssn
-                //                                                },
-                //                                  SecurityCredentials = new SecurityCredentials()
-                //                                                        {
-                //                                                            Password = model.Password
-                //                                                        }
+                model.Ssn = model.Ssn.Replace("-", "");
+                model.Ssn = model.Ssn.Replace(".", "");
+                if (long.TryParse(model.Ssn, out mSsn))
+                {
+                    User user = new User
+                                {
+                                    fname = model.FirstName,
+                                    lname = model.SurName,
+                                    created_timestamp = DateTime.Now,
+                                    email = model.EMail,
+                                    is_active = true,
+                                    passwd = model.Password,
+                                    phoneno = model.PhoneNo,
+                                    sec_group = "User",
+                                    ssn = mSsn
+                                };
 
-                //                              };
-
-                var user = new Object();
-
-                bool success = new UserLogic().SaveUser(user);
-                if (success)
-                    return View("Index");
+                    bool success = new UserLogic().SaveUser(user);
+                    if (success)
+                        return View("Index");
+                }
             }
 
             return View(model);

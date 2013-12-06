@@ -25,7 +25,8 @@ namespace WebClient.Controllers
             {
                 var user = new Object();
 
-                bool success = new UserLogic().SaveUser(user);
+                //bool success = new UserLogic().SaveUser(user);
+                bool success = true;
                 if (success)
                     return View("Index");
             }

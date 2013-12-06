@@ -20,14 +20,14 @@ namespace WebClient.Controllers
         [HttpPost]
         public ActionResult DepositMoney(DepositViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var user = model.ConvertToBusinessModel();
+            //if (ModelState.IsValid)
+            //{
+            //    var user = model.ConvertToBusinessModel();
 
-                bool success = new UserLogic().SaveUser(user);
-                if (success)
-                    return View("Index");
-            }
+            //    bool success = new UserLogic().SaveUser(user);
+            //    if (success)
+            //        return View("Index");
+            //}
 
             return View(model);
         }

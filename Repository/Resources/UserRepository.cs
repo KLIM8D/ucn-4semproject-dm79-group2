@@ -39,5 +39,17 @@ namespace Repository.Resources
         {
             return db.security_credentials.FirstOrDefault(x => x.sec_cre_uname.Equals(userName));
         }
+
+        public void InsertDetails(user_details value)
+        {
+            db.user_details.Add(value);
+            db.SaveChanges();
+        }
+
+        public void InsertSecurityCred(security_credentials value)
+        {
+            db.security_credentials.Add(value);
+            db.SaveChanges();
+        }
     }
 }

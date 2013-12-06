@@ -28,5 +28,16 @@ namespace Utils.Security
 
             return Encoding.UTF8.GetString(hash);
         }
+
+        public string MD5(string input)
+        {
+            byte[] hash;
+            using (MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {   
+                hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+            }
+
+            return Encoding.UTF8.GetString(hash);
+        }
     }
 }

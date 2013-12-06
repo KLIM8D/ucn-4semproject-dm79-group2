@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Utils.Helpers
+namespace Utils.ExtensionMethods
 {
-    public static class NullableTypesHelper
+    public static class NullableTypes
     {
-        public static bool TryParseBool(bool? value)
+        public static bool TryParseBool(this bool? value)
         {
             if (value == null)
                 return false;
@@ -16,7 +16,17 @@ namespace Utils.Helpers
             return (bool)value;
         }
 
-        public static int? TryParseInt(string val)
+        public static DateTime TryParseDateTime(this DateTime? value)
+        {
+            return value ?? DateTime.MinValue;
+        }
+
+        public static int TryParseInt(this int? value)
+        {
+            return value ?? Int32.MinValue;
+        }
+
+        public static int? TryParseInt(this string val)
         {
             int outValue;
             return int.TryParse(val, out outValue) ? (int?)outValue : null;

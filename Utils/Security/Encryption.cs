@@ -1,84 +1,62 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Utils.Security
 {
     public class Encryption
     {
-        public byte[] EncryptStringToBytes(string plainText, byte[] Key, byte[] IV)
+        public static byte[] EncryptString(string toEncrypt, byte[] encryptionKey)
         {
-            // Check arguments. 
-            if (plainText == null || plainText.Length <= 0)
-                throw new ArgumentNullException("plainText");
-            if (Key == null || Key.Length <= 0)
-                throw new ArgumentNullException("Key");
-            if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException("Key");
-            byte[] encrypted;
-            // Create an AesCryptoServiceProvider object 
-            // with the specified key and IV. 
-            using (AesCryptoServiceProvider aesAlg = new AesCryptoServiceProvider())
+            if (string.IsNullOrEmpty(toEncrypt)) throw new ArgumentException("toEncrypt");
+            if (encryptionKey == null || encryptionKey.Length == 0) throw new ArgumentException("encryptionKey");
+            var toEncryptBytes = Encoding.UTF8.GetBytes(toEncrypt);
+            using (var provider = new AesCryptoServiceProvider())
             {
-                aesAlg.Key = Key;
-                aesAlg.IV = IV;
-                // Create a decrytor to perform the stream transform.
-                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
-                // Create the streams used for encryption. 
-                using (MemoryStream msEncrypt = new MemoryStream())
+                provider.Key = encryptionKey;
+                provider.Mode = CipherMode.CBC;
+                provider.Padding = PaddingMode.PKCS7;
+                using (var encryptor = provider.CreateEncryptor(provider.Key, provider.IV))
                 {
-                    using (CryptoStream csEncrypt =
-                            new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    using (var ms = new MemoryStream())
                     {
-                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        ms.Write(provider.IV, 0, 16);
+                        using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
                         {
-                            //Write all data to the stream.
-                            swEncrypt.Write(plainText);
+                            cs.Write(toEncryptBytes, 0, toEncryptBytes.Length);
+                            cs.FlushFinalBlock();
                         }
-                        encrypted = msEncrypt.ToArray();
+                        return ms.ToArray();
                     }
                 }
             }
-            // Return the encrypted bytes from the memory stream. 
-            return encrypted;
         }
 
-        public string DecryptStringFromBytes(byte[] cipherText, byte[] Key, byte[] IV)
+        public static string DecryptString(byte[] encryptedString, byte[] encryptionKey)
         {
-            // Check arguments. 
-            if (cipherText == null || cipherText.Length <= 0)
-                throw new ArgumentNullException("cipherText");
-            if (Key == null || Key.Length <= 0)
-                throw new ArgumentNullException("Key");
-            if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException("IV");
-            // Declare the string used to hold 
-            // the decrypted text. 
-            string plaintext = null;
-            // Create an AesCryptoServiceProvider object 
-            // with the specified key and IV. 
-            using (AesCryptoServiceProvider aesAlg = new AesCryptoServiceProvider())
+            using (var provider = new AesCryptoServiceProvider())
             {
-                aesAlg.Key = Key;
-                aesAlg.IV = IV;
-                // Create a decrytor to perform the stream transform.
-                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
-                // Create the streams used for decryption. 
-                using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                provider.Key = encryptionKey;
+                using (var ms = new MemoryStream(encryptedString))
                 {
-                    using (CryptoStream csDecrypt =
-                            new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                    // Read the first 16 bytes which is the IV.
+                    byte[] iv = new byte[16];
+                    ms.Read(iv, 0, 16);
+                    provider.IV = iv;
+
+                    using (var decryptor = provider.CreateDecryptor())
                     {
-                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        using (var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
                         {
-                            // Read the decrypted bytes from the decrypting stream 
-                            // and place them in a string.
-                            plaintext = srDecrypt.ReadToEnd();
+                            using (var sr = new StreamReader(cs))
+                            {
+                                return sr.ReadToEnd();
+                            }
                         }
                     }
                 }
             }
-            return plaintext;
         }
     }
 }
