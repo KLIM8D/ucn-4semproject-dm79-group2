@@ -56,3 +56,19 @@ footer {
 .signin-form {
     width: 200px;
 }
+
+.tiny-form input {
+ width: 40px;   
+}
+
+.short-form input {
+ width: 175px;   
+}
+
+.medium-form input {
+    width: 345px;
+}
+
+.long-form input {
+ width: 440px;   
+}

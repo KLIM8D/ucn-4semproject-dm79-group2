@@ -125,6 +125,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Assets\css\custom.css" />
+    <Content Include="Assets\js\bootstrap-modal.js" />
     <Content Include="Assets\js\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Assets\js\loader.js" />
     <Content Include="Global.asax" />
