@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessLogic.Resources;
+using WebClient.Models;
 
 namespace WebClient.Controllers
 {
@@ -16,5 +18,19 @@ namespace WebClient.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Index(UserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new Object();
+
+                bool success = new UserLogic().SaveUser(user);
+                if (success)
+                    return View("Index");
+            }
+
+            return View(model);
+        }
     }
 }
