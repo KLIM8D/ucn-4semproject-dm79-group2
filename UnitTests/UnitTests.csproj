@@ -61,6 +61,7 @@
     <Compile Include="EncryptionTests.cs" />
     <Compile Include="GraphServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">

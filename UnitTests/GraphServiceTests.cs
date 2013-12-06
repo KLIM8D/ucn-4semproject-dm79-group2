@@ -34,32 +34,38 @@ namespace UnitTests
         [TestMethod]
         public void ParseJson()
         {
-            List<RootObject> stations;
-            int zoneNo = 1;
-            using (StreamReader r = new StreamReader(@"Z:\workspace\holdepladser\zone" + zoneNo + ".json"))
+            List<RootObject> stations = null;
+            if (1 > 2)
             {
-                string json = r.ReadToEnd();
-                stations = JsonHelper.DeserializeJson<List<RootObject>>(json, true);
-            }
+                RKConn db = new RKConn();
 
-            RKConn db = new RKConn();
-            foreach (var rootObject in stations)
-            {
-                int zoneType = Convert.ToInt32(rootObject.type.nr);
-                var zone = db.routing_zones.FirstOrDefault(x => x.rot_zon_area_id.Equals(zoneNo));
-                var type = db.transit_type.FirstOrDefault(x => x.tra_typ_id.Equals(zoneType));
-                var ok = new transit_locations
-                         {
-                             rot_zon_id = zone.rot_zon_id,
-                             tra_loc_active = true,
-                             tra_loc_area_id = zoneNo,
-                             tra_loc_title = rootObject.navn,
-                             //transit_type = type,
-                             tra_typ_id = zoneType
-                         };
+                for (int zoneNo = 192; zoneNo < 195; ++zoneNo)
+                {
+                    //int zoneNo = 1;
+                    using (StreamReader r = new StreamReader(@"Z:\workspace\holdepladser\zone" + zoneNo + ".json"))
+                    {
+                        string json = r.ReadToEnd();
+                        stations = JsonHelper.DeserializeJson<List<RootObject>>(json, true);
+                    }
 
-                db.transit_locations.Add(ok);
-                db.SaveChanges();
+                    foreach (var rootObject in stations)
+                    {
+                        int zoneType = Convert.ToInt32(rootObject.type.nr);
+                        var zone = db.routing_zones.FirstOrDefault(x => x.rot_zon_area_id.Equals(zoneNo));
+                        var ok = new transit_locations
+                                 {
+                                     rot_zon_id = zone.rot_zon_id,
+                                     tra_loc_active = true,
+                                     tra_loc_area_id = zoneNo,
+                                     tra_loc_title = rootObject.navn,
+                                     //transit_type = type,
+                                     tra_typ_id = zoneType
+                                 };
+
+                        db.transit_locations.Add(ok);
+                        db.SaveChanges();
+                    }
+                }
             }
 
             Assert.IsNotNull(stations);

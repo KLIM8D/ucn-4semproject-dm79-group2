@@ -12,13 +12,13 @@ namespace Repository.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class user_address
+    public partial class vault_depositits
     {
-        public int usr_adr_id { get; set; }
+        public int vau_dep_id { get; set; }
         public int usr_det_id { get; set; }
-        public int geo_zip_id { get; set; }
-        public string usr_adr_street { get; set; }
+        public decimal vau_dep_amount { get; set; }
+        public byte[] vau_dep_timestamp { get; set; }
     
-        public virtual geo_zipcodes geo_zipcodes { get; set; }
+        public virtual user_details user_details { get; set; }
     }
 }
