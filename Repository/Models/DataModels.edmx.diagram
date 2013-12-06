@@ -4,30 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2e696f6df7bd412b8730a911f69279fd" Name="Diagram1">
-        <EntityTypeShape EntityType="RKDataModels.card_issued" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RKDataModels.card_retracted" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="RKDataModels.geo_zipcodes" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RKDataModels.security_credentials" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RKDataModels.security_groups" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RKDataModels.user_address" Width="1.5" PointX="10.5" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RKDataModels.user_details" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
-        <AssociationConnector Association="RKDataModels.usr_det_car_iss" ManuallyRouted="false" />
-        <AssociationConnector Association="RKDataModels.usr_det_car_ret" ManuallyRouted="false" />
-        <AssociationConnector Association="RKDataModels.geo_zip_usr_adr" ManuallyRouted="false" />
-        <AssociationConnector Association="RKDataModels.sec_cre_usr_det" ManuallyRouted="false" />
-        <AssociationConnector Association="RKDataModels.sec_gro_sec_cre" ManuallyRouted="false" />
-        <AssociationConnector Association="RKDataModels.usr_det_usr_adr" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="RKDataModels.User" Width="1.5" PointX="4.5" PointY="1.75" />
-        <EntityTypeShape EntityType="RKDataModels.routing_operators" Width="1.5" PointX="8.2693209109219357" PointY="22.755589376555566" />
-        <EntityTypeShape EntityType="RKDataModels.routing_zone_neighbors" Width="1.5" PointX="2.7074031171889059" PointY="14.244944683390179" />
-        <EntityTypeShape EntityType="RKDataModels.routing_zones" Width="1.5" PointX="0.8670449745222204" PointY="28.945124341615067" />
-        <EntityTypeShape EntityType="RKDataModels.transit_locations" Width="1.5" PointX="5.1514735637006694" PointY="11.64436983114312" />
-        <EntityTypeShape EntityType="RKDataModels.transit_type" Width="1.5" PointX="5.9399561052862353" PointY="17.9378968560779" />
-        <AssociationConnector Association="RKDataModels.rot_opt_rot_zon" />
-        <AssociationConnector Association="RKDataModels.rot_zon_rot_zon_ngr" />
-        <AssociationConnector Association="RKDataModels.rot_zon_tra_loc" />
-        <AssociationConnector Association="RKDataModels.tra_typ_tra_loc" />
+      <Diagram DiagramId="c85f0aeb61394da4b89be45f97062576" Name="Diagram1">
+        <EntityTypeShape EntityType="DataModels.card_issued" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.card_retracted" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.geo_zipcodes" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.routing_operators" Width="1.5" PointX="9.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.routing_zone_neighbors" Width="1.5" PointX="14.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.routing_zones" Width="1.5" PointX="12" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.security_credentials" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.security_groups" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.transit_locations" Width="1.5" PointX="14.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.transit_type" Width="1.5" PointX="12" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.user_address" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.user_details" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.vault_depositits" Width="1.5" PointX="7.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModels.vault_withdraws" Width="1.5" PointX="7.5" PointY="10.375" IsExpanded="true" />
+        <AssociationConnector Association="DataModels.usr_det_car_iss" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModels.usr_det_car_ret" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModels.geo_zip_usr_adr" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModels.rot_opt_rot_zon" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModels.rot_zon_rot_zon_ngr" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModels.rot_zon_tra_loc" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModels.sec_cre_usr_det" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModels.sec_gro_sec_cre" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModels.tra_typ_tra_loc" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModels.usr_det_vau_dep" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModels.usr_det_vau_wit" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

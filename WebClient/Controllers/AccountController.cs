@@ -15,6 +15,7 @@ namespace WebClient.Controllers
         //
         // GET: /Account/
 
+        [Authorize]
         public ActionResult Index()
         {
             

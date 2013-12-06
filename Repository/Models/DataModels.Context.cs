@@ -12,6 +12,9 @@ namespace Repository.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class RKConn : DbContext
     {
@@ -28,14 +31,21 @@ namespace Repository.Models
         public DbSet<card_issued> card_issued { get; set; }
         public DbSet<card_retracted> card_retracted { get; set; }
         public DbSet<geo_zipcodes> geo_zipcodes { get; set; }
-        public DbSet<security_credentials> security_credentials { get; set; }
-        public DbSet<security_groups> security_groups { get; set; }
-        public DbSet<user_address> user_address { get; set; }
-        public DbSet<user_details> user_details { get; set; }
         public DbSet<routing_operators> routing_operators { get; set; }
         public DbSet<routing_zone_neighbors> routing_zone_neighbors { get; set; }
         public DbSet<routing_zones> routing_zones { get; set; }
+        public DbSet<security_credentials> security_credentials { get; set; }
+        public DbSet<security_groups> security_groups { get; set; }
         public DbSet<transit_locations> transit_locations { get; set; }
         public DbSet<transit_type> transit_type { get; set; }
+        public DbSet<user_address> user_address { get; set; }
+        public DbSet<user_details> user_details { get; set; }
+        public DbSet<vault_depositits> vault_depositits { get; set; }
+        public DbSet<vault_withdraws> vault_withdraws { get; set; }
+    
+        public virtual System.Data.Entity.Core.Objects.ObjectResult<User> GetUserById(ObjectParameter param1)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<User>("GetUserById");
+        }
     }
 }

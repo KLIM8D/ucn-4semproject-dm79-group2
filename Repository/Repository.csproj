@@ -94,13 +94,23 @@
     <Compile Include="Models\transit_type.cs">
       <DependentUpon>DataModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\user_address.cs">
       <DependentUpon>DataModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user_details.cs">
       <DependentUpon>DataModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\vault_depositits.cs">
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vault_withdraws.cs">
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\SecurityGroupRepository.cs" />
     <Compile Include="Resources\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

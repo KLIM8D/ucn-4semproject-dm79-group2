@@ -18,7 +18,8 @@ namespace Repository.Models
         {
             this.card_issued = new HashSet<card_issued>();
             this.card_retracted = new HashSet<card_retracted>();
-            this.user_address = new HashSet<user_address>();
+            this.vault_depositits = new HashSet<vault_depositits>();
+            this.vault_withdraws = new HashSet<vault_withdraws>();
         }
     
         public int usr_det_id { get; set; }
@@ -26,7 +27,7 @@ namespace Repository.Models
         public string usr_det_fname { get; set; }
         public string usr_det_lname { get; set; }
         public long usr_det_ssn { get; set; }
-        public int usr_det_phonono { get; set; }
+        public int usr_det_phoneno { get; set; }
         public string usr_det_email { get; set; }
         public System.DateTime usr_det_timestamp { get; set; }
         public bool usr_det_active { get; set; }
@@ -34,6 +35,7 @@ namespace Repository.Models
         public virtual ICollection<card_issued> card_issued { get; set; }
         public virtual ICollection<card_retracted> card_retracted { get; set; }
         public virtual security_credentials security_credentials { get; set; }
-        public virtual ICollection<user_address> user_address { get; set; }
+        public virtual ICollection<vault_depositits> vault_depositits { get; set; }
+        public virtual ICollection<vault_withdraws> vault_withdraws { get; set; }
     }
 }
