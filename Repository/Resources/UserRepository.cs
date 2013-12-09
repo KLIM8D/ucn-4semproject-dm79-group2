@@ -55,5 +55,10 @@ namespace Repository.Resources
 
             return value;
         }
+
+        public bool ValidateCred(string userName, string password)
+        {
+            return db.security_credentials.Any(x => x.sec_cre_uname.Equals(userName) && x.sec_cre_passwd.Equals(password));
+        }
     }
 }

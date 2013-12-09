@@ -1,15 +1,22 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
 using WebClient.Models;
+using Utils.Authorization;
 
 namespace WebClient.Controllers
 {
     public class AccountController : Controller
     {
-        [Authorize]
+        //
+        // GET: /Account/
         public ActionResult Index()
         {
-            
+            return View();
+        }
+
+        [AuthorizeUser(Role = "Administrator")]
+        public ActionResult TestAuth()
+        {
             return View();
         }
 

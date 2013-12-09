@@ -83,6 +83,11 @@ namespace BusinessLogic.Resources
             var start = Vertices.FirstOrDefault(x => x.ID.Equals(startId));
             var end = Vertices.FirstOrDefault(x => x.ID.Equals(endId));
 
+            if(start == null)
+                throw new Exception("Could not find start vertice with specified ID: " + startId);
+            if (end == null)
+                throw new Exception("Could not find end vertice with specified ID: " + endId);
+
             var current = start;
             q.Enqueue(current);
             Visited.Add(current, true);
@@ -112,6 +117,8 @@ namespace BusinessLogic.Resources
             returnList.Add(end);
             for (var node = end; Nodes.TryGetValue(node, out node);)
                 returnList.Add(node);
+
+            returnList.Reverse();
 
             return returnList;
         }

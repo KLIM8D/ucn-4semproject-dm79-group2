@@ -20,6 +20,7 @@ namespace WebClient.Models
         public string Ssn { get; set; }
         [Required(ErrorMessage = "*")]
         [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\d{8}$", ErrorMessage = "Indtast venligst et 8 cifret telefon nummer")]
         [DisplayName("Tlf. Nr.")]
         public int PhoneNo { get; set; }
         [Required(ErrorMessage = "*")]
@@ -35,6 +36,7 @@ namespace WebClient.Models
         [Required(ErrorMessage = "*")]
         [DataType(DataType.PostalCode)]
         [DisplayName("Post Nr.")]
+        [RegularExpression(@"^\d{4}$", ErrorMessage = "Indtast venligst et 4 cifret post nummer")]
         public int ZipCode { get; set; }
 
         //SecurityCred

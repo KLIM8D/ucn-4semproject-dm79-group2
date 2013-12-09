@@ -9,36 +9,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="~/assets/js/loader.js"></script>
     <title>@ViewBag.Header - @ViewBag.Title</title>
-    @RenderSection("scripts")
 </head>
-<body>
-    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <h1><a class="navbar-brand" href="/">@ViewBag.Header</a></h1>
-            </div>
-            <div class="navbar-collapse collapse">
-                @if (Request.IsAuthenticated)
-                {
-                    <div class="pull-right">
-                        <strong style="color: white;">@Html.Encode(User.Identity.Name)</strong>
-                        @Html.ActionLink("Sign Out", "Logout", "Account")
-                    </div>
-                }
-                else
-                {
-                    using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "navbar-form pull-right" }))
+    <body>
+        <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <h1><a class="navbar-brand" href="/">@ViewBag.Header</a></h1>
+                </div>
+                <div class="navbar-collapse collapse">
+                    @if (Request.IsAuthenticated)
                     {
-                        @Html.TextBox("UserName", null, new { @class = "form-control signin-form", placeholder = "Username" })
-                        @Html.Password("Password", null, new { @class = "form-control signin-form", placeholder = "Password", style = "margin-left: 6px;" })
-                        <input class="btn btn-success" type="submit" value="Sign in" />
+                        <div class="pull-right">
+                            <strong style="color: white;">@Html.Encode(User.Identity.Name)</strong>
+                            @Html.ActionLink("Sign Out", "Logout", "Account")
+                        </div>
                     }
-                }
+                    else
+                    {
+                        using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "navbar-form pull-right" }))
+                        {
+                            @Html.TextBox("UserName", null, new { @class = "form-control signin-form", placeholder = "Username" })
+                            @Html.Password("Password", null, new { @class = "form-control signin-form", placeholder = "Password", style = "margin-left: 6px;" })
+                            <input class="btn btn-success" type="submit" value="Sign in" />
+                        }
+                    }
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        @RenderBody()
-    </div>
-</body>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </body>
+        @RenderSection("scripts", false)
 </html>

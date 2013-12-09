@@ -117,6 +117,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BalanceViewModel.cs" />
     <Compile Include="Models\DepositViewModel.cs" />
     <Compile Include="Models\LogOnModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -166,9 +167,16 @@
       <Project>{e30fefe0-d62b-4918-afcd-ac87b86147dd}</Project>
       <Name>Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{63926af0-c229-4c48-b134-0a645b3f371f}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Deposit\DepositMoney.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\TestAuth.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

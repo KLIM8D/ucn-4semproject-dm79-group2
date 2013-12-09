@@ -14,6 +14,74 @@
         <div class="col-6 col-sm-6 col-lg-4">
             <h3>Not a member yet?</h3>
             <p>This function is missing validation, and some other stuff... So, its basically not working :-/</p>
+            <p><a data-toggle="modal" class="btn btn-default" href="#createAccountModal" role="button">Create account &raquo;</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Start of: New account modal -->
+<div id="createAccountModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">New account, details</h4>
+            </div>
+            @model global::WebClient.Models.UserViewModel
+            @using (Html.BeginForm("CreateUser", "User"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <div class="modal-body">
+                        <div id="newaccount-container">
+                            <div>
+                                <div style="width: 75px; float: left;">Username <span style="color: red;">@Html.ValidationMessageFor(model => model.UserName)</span></div>
+                                <div style="width: 190px; float: left;" class="short-form">
+                                    @Html.EditorFor(model => model.UserName)
+                                </div>
+                                <div style="width: 75px; float: left;">Password <span style="color: red;">@Html.ValidationMessageFor(model => model.Password)</span></div>
+                                <div style="width: 190px; float: left;" class="short-form">@Html.EditorFor(model => model.Password)</div>
+                            </div>
+                            <div style="clear: both; padding-top: 35px;">
+                                <div style="width: 75px; float: left;">Firstname <span style="color: red;">@Html.ValidationMessageFor(model => model.FirstName)</span></div>
+                                <div style="width: 190px; float: left;" class="short-form">
+                                    @Html.EditorFor(model => model.FirstName)
+                                </div>
+                                <div style="width: 75px; float: left;">Surname <span style="color: red;">@Html.ValidationMessageFor(model => model.SurName)</span></div>
+                                <div style="width: 190px; float: left;" class="short-form">@Html.EditorFor(model => model.SurName)</div>
+                            </div>
+                            <div style="clear: both; padding-top: 5px;">
+                                <div style="width: 75px; float: left;">Street <span style="color: red;">@Html.ValidationMessageFor(model => model.Street)</span></div>
+                                <div style="width: 440px; float: left;" class=" long-form ">@Html.EditorFor(model => model.Street)</div>
+                            </div>
+                            <div style="clear: both; padding-top: 5px;">
+                                <div style="width: 75px; float: left;">Zipcode <span style="color: red;">@Html.ValidationMessageFor(model => model.ZipCode)</span></div>
+                                <div style="width: 60px; float: left;" class="tiny-form">@Html.EditorFor(model => model.ZipCode)</div>
+                                <div style="width: 35px; float: left;">City</div>
+                                <div style="width: 345px; float: left;" class="medium-form"><input disabled="disabled" /></div>
+                            </div>
+                            <div style="clear: both; padding-top: 35px;">
+                                <div style="clear: both;">
+                                    <div style="width: 75px; float: left;">Phone no. <span style="color: red;">@Html.ValidationMessageFor(model => model.PhoneNo)</span></div>
+                                    <div style="width: 190px; float: left;" class="short-form">@Html.EditorFor(model => model.PhoneNo)</div>
+                                    <div style="width: 75px; float: left;">SSN <span style="color: red;">@Html.ValidationMessageFor(model => model.Ssn)</span></div>
+                                    <div style="width: 190px; float: left;" class="short-form">@Html.EditorFor(model => model.Ssn)</div>
+                                </div>
+                            </div>
+                            <div style="clear: both; padding-top: 5px;">
+                                <div style="width: 75px; float: left;">Email <span style="color: red;">@Html.ValidationMessageFor(model => model.EMail)</span></div>
+                                <div style="width: 440px; float: left;" class=" long-form ">@Html.EditorFor(model => model.EMail)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create account</button>
+                    </div>
+                </fieldset>
+            }
         </div>
     </div>
 </div>

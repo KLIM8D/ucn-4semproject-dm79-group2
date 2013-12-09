@@ -80,6 +80,12 @@
     <Compile Include="Security\Hashing.cs" />
     <Compile Include="Serialization\JsonHelper.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{e30fefe0-d62b-4918-afcd-ac87b86147dd}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

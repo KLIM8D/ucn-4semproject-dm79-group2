@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using BusinessLogic.Resources;
@@ -31,17 +32,20 @@ namespace WebClient.Controllers
                                     fname = model.FirstName,
                                     lname = model.SurName,
                                     created_timestamp = DateTime.Now,
+                                    uname = model.UserName,
                                     email = model.EMail,
                                     is_active = true,
                                     passwd = model.Password,
                                     phoneno = model.PhoneNo,
                                     sec_group = "User",
-                                    ssn = Encoding.UTF8.GetBytes(mSsn.ToString())
+                                    ssn = Encoding.UTF8.GetBytes(mSsn.ToString()),
+                                    zipcode = model.ZipCode,
+                                    street = model.Street
                                 };
 
                     bool success = new UserLogic().SaveUser(user);
                     if (success)
-                        return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+                        return View("../Home/Index");
                 }
             }
 

@@ -61,16 +61,27 @@ namespace BusinessLogic.Resources
                                   };
 
                 _cityRepository.InsertUserAddress(userAddress);
+
+                new TravelCardLogic().OrderNewCard(user);
+
+                return true;
             }
 
-            new TravelCardLogic().OrderNewCard(user);
 
-            return true;
+
+            return false;
         }
 
         public bool LoginUser(string userName, string password)
         {
-            return true;
+            if(String.IsNullOrEmpty(userName))
+                throw new Exception("userName cannot be null or empty");
+            if (String.IsNullOrEmpty(password))
+                throw new Exception("password cannot be null or empty");
+
+            string hashedPassword = new Hashing().SHA512(password);
+
+            return new UserRepository().ValidateCred(userName, hashedPassword);
         }
     }
 }
