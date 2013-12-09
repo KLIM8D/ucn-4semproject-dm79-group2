@@ -17,12 +17,5 @@ namespace WebClient.Models
         [DataType(DataType.CreditCard)] 
         [DisplayName("Kortnummer")]
         public string CreditCardNumber { get; set; }
-        
-
-        public object ConvertToBusinessModel()
-        {
-            //TODO:
-            return new object();
-        }
     }
 }

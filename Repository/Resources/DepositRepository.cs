@@ -16,7 +16,7 @@ namespace Repository.Resources
             db = new RKConn();
         }
 
-        public int InsertDeposit(Deposit deposit)
+        public int InsertDeposit(vault_depositits deposit)
         {
             db.vault_depositits.Add(deposit);
             return db.SaveChanges();
