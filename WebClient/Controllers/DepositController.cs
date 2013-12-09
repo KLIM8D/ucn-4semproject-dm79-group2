@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using BusinessLogic.Resources;
 using WebClient.Models;
 
 namespace WebClient.Controllers
@@ -15,7 +14,6 @@ namespace WebClient.Controllers
         {
             return View();
         }
-
 
         [HttpPost]
         public ActionResult DepositMoney(DepositViewModel model)

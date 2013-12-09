@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using BusinessLogic.Resources;
 using Repository.Models;
@@ -11,14 +8,6 @@ namespace WebClient.Controllers
 {
     public class UserController : Controller
     {
-        //
-        // GET: /User/
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult CreateUser()
         {
             return View();
@@ -49,7 +38,7 @@ namespace WebClient.Controllers
 
                     bool success = new UserLogic().SaveUser(user);
                     if (success)
-                        return View("Index");
+                        return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
                 }
             }
 
