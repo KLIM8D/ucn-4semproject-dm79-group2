@@ -37,14 +37,17 @@ namespace UnitTests
                         {
                             fname = "Chris",
                             lname = "Tindbæk",
-                            city = "Aabybro",
+                            city = "Aalborg",
                             created_timestamp = DateTime.Now,
-                            email = "Christind@hotmail.com",
+                            uname = "Chris",
+                            email = "CoolEmail@hotmail.com",
                             is_active = true,
                             passwd = "chrischrischris",
                             phoneno = 28135473,
                             sec_group = "User",
-                            ssn = 2804900000
+                            zipcode = 9000,
+                            street = "HenningVej 203",
+                            ssn = Encoding.UTF8.GetBytes("2804900000")
                         };
             _userLogic.SaveUser(user);
         }

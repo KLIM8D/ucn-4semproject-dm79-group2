@@ -18,7 +18,7 @@ namespace Repository.Models
         public string street { get; set; }
         public Nullable<int> zipcode { get; set; }
         public string city { get; set; }
-        public Nullable<long> ssn { get; set; }
+        public byte[] ssn { get; set; }
         public Nullable<int> phoneno { get; set; }
         public string email { get; set; }
         public string sec_group { get; set; }
