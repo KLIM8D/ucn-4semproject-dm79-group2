@@ -28,6 +28,7 @@ namespace WebClient.Controllers
             //    if (success)
             //        return View("Index");
             //}
+            return View();
         }
     }
 }
