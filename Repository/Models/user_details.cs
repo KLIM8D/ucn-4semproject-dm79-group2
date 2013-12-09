@@ -26,7 +26,7 @@ namespace Repository.Models
         public int sec_cre_id { get; set; }
         public string usr_det_fname { get; set; }
         public string usr_det_lname { get; set; }
-        public string usr_det_ssn { get; set; }
+        public byte[] usr_det_ssn { get; set; }
         public int usr_det_phoneno { get; set; }
         public string usr_det_email { get; set; }
         public System.DateTime usr_det_timestamp { get; set; }

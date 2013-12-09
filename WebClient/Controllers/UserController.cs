@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using BusinessLogic.Resources;
 using Repository.Models;
@@ -33,7 +36,7 @@ namespace WebClient.Controllers
                                     passwd = model.Password,
                                     phoneno = model.PhoneNo,
                                     sec_group = "User",
-                                    ssn = mSsn
+                                    ssn = Encoding.UTF8.GetBytes(mSsn.ToString())
                                 };
 
                     bool success = new UserLogic().SaveUser(user);

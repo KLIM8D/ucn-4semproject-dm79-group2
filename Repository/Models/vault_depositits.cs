@@ -17,7 +17,7 @@ namespace Repository.Models
         public int vau_dep_id { get; set; }
         public int usr_det_id { get; set; }
         public decimal vau_dep_amount { get; set; }
-        public byte[] vau_dep_timestamp { get; set; }
+        public Nullable<System.DateTime> vau_dep_timestamp { get; set; }
     
         public virtual user_details user_details { get; set; }
     }

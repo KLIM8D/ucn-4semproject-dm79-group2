@@ -1,5 +1,6 @@
 using System;
 //using Repository.Models;
+using System.Linq;
 using System.Text;
 using Repository.Models;
 using Repository.Resources;
@@ -34,27 +35,32 @@ namespace BusinessLogic.Resources
                                   sec_gro_id = role.sec_gro_id,
                                   sec_cre_passwd = new Hashing().SHA512(user.passwd)
                               };
+                userSec = _userRepo.InsertSecurityCred(userSec);
 
-                byte[] key = Encoding.UTF8.GetBytes(new Hashing().MD5(userSec.sec_cre_uname + userSec.sec_cre_timestamp));
+                byte[] key = new Hashing().MD5(userSec.sec_cre_uname + userSec.sec_cre_timestamp);
                 var userDetails = new user_details
                                   {
                                       usr_det_active = user.is_active.TryParseBool(),
                                       usr_det_email = user.email,
                                       usr_det_fname = user.fname,
                                       usr_det_lname = user.lname,
-                                      usr_det_ssn = Encryption.EncryptString(user.ssn.ToString(), key).ToString(),
+                                      usr_det_ssn = Encryption.EncryptString(user.ssn.ToString(), key),
                                       usr_det_phoneno = user.phoneno.TryParseInt(),
-                                      usr_det_timestamp = user.created_timestamp.TryParseDateTime()
+                                      usr_det_timestamp = user.created_timestamp.TryParseDateTime(),
+                                      sec_cre_id = userSec.sec_cre_id
                                   };
+                
+                userDetails = _userRepo.InsertDetails(userDetails);
+
                 var city = _cityRepository.GetCity(user.zipcode.TryParseInt());
                 var userAddress = new user_address
                                   {
                                       usr_adr_street = user.street,
                                       geo_zip_id = city.geo_zip_id,
-                                      //usr_det_id = userDetails.
+                                      usr_det_id = userDetails.usr_det_id
                                   };
-                _userRepo.InsertSecurityCred(userSec);
-                _userRepo.InsertDetails(userDetails);
+
+                _cityRepository.InsertUserAddress(userAddress);
             }
 
             new TravelCardLogic().OrderNewCard(user);
