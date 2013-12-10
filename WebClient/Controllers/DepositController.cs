@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
+using BusinessLogic.Resources;
+using Repository.Models;
 using WebClient.Models;
 
 namespace WebClient.Controllers
@@ -18,15 +20,20 @@ namespace WebClient.Controllers
         [HttpPost]
         public ActionResult DepositMoney(DepositViewModel model)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    var user = model.ConvertToBusinessModel();
+            if (ModelState.IsValid)
+            {
+                var deposit = new vault_depositits()
+                                           {
+                                               usr_det_id = model.UserId,
+                                               vau_dep_amount = model.Amount,
+                                           };
 
-            //    bool success = new UserLogic().SaveUser(user);
-            //    if (success)
-            //        return View("Index");
-            //}
+                bool success = new DepositLogic().SaveDeposit(deposit);
+                if (success)
+                    return View("Index");
+            }
             return View();
         }
+
     }
 }
