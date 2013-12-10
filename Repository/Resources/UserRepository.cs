@@ -35,6 +35,14 @@ namespace Repository.Resources
             return query.FirstOrDefault();
         }
 
+        public int GetUserId(string userName)
+        {
+            var ok = db.security_credentials.Where(x => x.sec_cre_uname.Equals(userName))
+                    .Select(x => x.user_details.FirstOrDefault().usr_det_id).FirstOrDefault();
+            return ok;
+
+        }
+
         public security_credentials GetCredentials(string userName)
         {
             return db.security_credentials.FirstOrDefault(x => x.sec_cre_uname.Equals(userName));

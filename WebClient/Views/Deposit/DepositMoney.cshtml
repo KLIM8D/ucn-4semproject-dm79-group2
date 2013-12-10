@@ -14,10 +14,8 @@
     <legend>Indbetal til Rejsekort</legend>
     <fieldset>
         <div class="editor-label">
-            Saldo:
-        </div>
-        <div class="editor-label">
-            "no data found"
+            @Html.LabelFor(model => model.Balance)
+            <span>No balance exists!</span>
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.Amount)
@@ -36,12 +34,16 @@
         <p>
             <input type="submit" value="Betal" />
         </p>
+        @if (Model != null && Model.Message != null)
+        {
+            <span style="color: green">@Model.Message</span>
+        }
     </fieldset>
     
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", "Home")
 </div>
 
 @section Scripts {

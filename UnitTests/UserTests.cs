@@ -31,6 +31,14 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void GetUserIdByUserName()
+        {
+            int userId = _userRepo.GetUserId("Morten");
+
+            Assert.IsNotNull(userId);
+        }
+
+        [TestMethod]
         public void InsertUser()
         {
             User user = new User

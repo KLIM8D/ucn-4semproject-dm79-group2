@@ -27,7 +27,7 @@ namespace UnitTests
             var deposit = new vault_depositits()
             {
                 vau_dep_amount = 100,
-                //vau_dep_timestamp = DateTime.Now,
+                vau_dep_timestamp = DateTime.Now,
                 usr_det_id = 1
             };
             _depLogic.SaveDeposit(deposit);

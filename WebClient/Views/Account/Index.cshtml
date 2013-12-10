@@ -9,6 +9,11 @@
 {
     <strong>@Html.Encode(User.Identity.Name)</strong>
     @Html.ActionLink("Sign Out", "Logout", "Account")
+    <div></div>
+    <div class="col-6 col-sm-6 col-lg-4">
+        <h3>Make a deposit on your account</h3>
+        @Html.ActionLink("Deposit Money", "DepositMoney", "Deposit" , null, new { @class="btn btn-default" })
+    </div>
 }
 else
 {
