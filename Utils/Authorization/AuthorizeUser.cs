@@ -20,6 +20,9 @@ namespace Utils.Authorization
             if (!authorized)
                 return false;
 
+            if (!String.IsNullOrEmpty(this.Role))
+                return true;
+
             return IsUserInRole(this.Role, httpContext.User.Identity.Name);
         }
 
