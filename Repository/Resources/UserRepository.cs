@@ -37,10 +37,16 @@ namespace Repository.Resources
 
         public int GetUserId(string userName)
         {
-            var ok = db.security_credentials.Where(x => x.sec_cre_uname.Equals(userName))
-                    .Select(x => x.user_details.FirstOrDefault().usr_det_id).FirstOrDefault();
-            return ok;
-
+            //var ok = db.security_credentials.Where(x => x.sec_cre_uname.Equals(userName))
+            //        .Select(x => x.user_details.FirstOrDefault().usr_det_id).FirstOrDefault();
+            //return ok;
+            security_credentials secCred = db.security_credentials.FirstOrDefault(x => x.sec_cre_uname.Equals(userName));
+            user_details userDet = db.user_details.FirstOrDefault(x => x.sec_cre_id.Equals(secCred.sec_cre_id));
+            if (userDet != null)
+            {
+                return userDet.usr_det_id;
+            }
+            return -1;
         }
 
         public security_credentials GetCredentials(string userName)

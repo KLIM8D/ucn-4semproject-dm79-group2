@@ -1,4 +1,4 @@
-﻿// Default code generation is disabled for model 'C:\Users\klim\workspace\ucn-4semproject-dm79-group2\Repository\Models\DataModels.edmx'. 
+﻿// Default code generation is disabled for model 'C:\Users\Chris\workspace\@GitHub\ucn-4semproject-dm79-group2\Repository\Models\DataModels.edmx'. 
 // To enable default code generation, change the value of the 'Code Generation Strategy' designer
 // property to an alternate value. This property is available in the Properties Window when the model is
 // open in the designer.

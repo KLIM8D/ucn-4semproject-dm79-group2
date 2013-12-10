@@ -31,19 +31,19 @@
             @Html.EditorFor(model => model.CreditCardNumber)
             <span style="color: red;">@Html.ValidationMessageFor(model => model.CreditCardNumber)</span>
         </div>
-        <p>
+        <div>
             <input type="submit" value="Betal" />
-        </p>
-        @if (Model != null && Model.Message != null)
-        {
-            <span style="color: green">@Model.Message</span>
-        }
+            @if (Model != null && Model.Message != null)
+            {
+                <span style="color: green">@Model.Message</span>
+            }
+        </div>
     </fieldset>
     
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", "Home")
+    @Html.ActionLink("Back to Account", "Index", "Account")
 </div>
 
 @section Scripts {
