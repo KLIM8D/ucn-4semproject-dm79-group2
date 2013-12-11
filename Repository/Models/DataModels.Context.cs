@@ -69,10 +69,10 @@ public partial class RKConn : DbContext
     public DbSet<register_travel> register_travel { get; set; }
 
 
-    public virtual ObjectResult<User> GetUserById(ObjectParameter param1)
+    public virtual System.Data.Entity.Core.Objects.ObjectResult<User> GetUserById(ObjectParameter param1)
     {
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<User>("GetUserById", param1);
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<User>("GetUserById");
     }
 
 }
