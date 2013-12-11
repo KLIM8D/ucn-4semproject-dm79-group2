@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c85f0aeb61394da4b89be45f97062576" Name="Diagram1">
+      <Diagram DiagramId="c85f0aeb61394da4b89be45f97062576" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="DataModels.card_issued" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DataModels.card_retracted" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DataModels.geo_zipcodes" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
@@ -30,6 +30,11 @@
         <AssociationConnector Association="DataModels.tra_typ_tra_loc" ManuallyRouted="false" />
         <AssociationConnector Association="DataModels.usr_det_vau_dep" ManuallyRouted="false" />
         <AssociationConnector Association="DataModels.usr_det_vau_wit" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DataModels.register_date_type" Width="1.5" PointX="14.25" PointY="7.5" />
+        <EntityTypeShape EntityType="DataModels.register_travel" Width="1.5" PointX="16.5" PointY="4" />
+        <AssociationConnector Association="DataModels.reg_dat_typ_reg_tra" />
+        <AssociationConnector Association="DataModels.tra_loc_reg_tra" />
+        <AssociationConnector Association="DataModels.usr_det_reg_tra" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

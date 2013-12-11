@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{63926AF0-C229-4C48-B134-0A645B3F371F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{D7DF0B67-E59B-4D1F-933C-963BAE5F1795}"
@@ -10,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{CD34040D-7C0B-41CA-BDF9-5245F17E36CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{E30FEFE0-D62B-4918-AFCD-AC87B86147DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndpointService", "EndpointService\EndpointService.csproj", "{42EDE429-C788-4B9C-B894-14CEE0574929}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +41,10 @@ Global
 		{E30FEFE0-D62B-4918-AFCD-AC87B86147DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E30FEFE0-D62B-4918-AFCD-AC87B86147DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E30FEFE0-D62B-4918-AFCD-AC87B86147DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42EDE429-C788-4B9C-B894-14CEE0574929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42EDE429-C788-4B9C-B894-14CEE0574929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42EDE429-C788-4B9C-B894-14CEE0574929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42EDE429-C788-4B9C-B894-14CEE0574929}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
