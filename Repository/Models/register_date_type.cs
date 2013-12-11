@@ -15,20 +15,24 @@ namespace Repository.Models
 using System;
     using System.Collections.Generic;
     
-public partial class user_address
+public partial class register_date_type
 {
 
-    public int usr_adr_id { get; set; }
+    public register_date_type()
+    {
 
-    public int usr_det_id { get; set; }
+        this.register_travel = new HashSet<register_travel>();
 
-    public int geo_zip_id { get; set; }
-
-    public string usr_adr_street { get; set; }
-
+    }
 
 
-    public virtual geo_zipcodes geo_zipcodes { get; set; }
+    public int reg_dat_typ_id { get; set; }
+
+    public string reg_dat_typ_title { get; set; }
+
+
+
+    public virtual ICollection<register_travel> register_travel { get; set; }
 
 }
 

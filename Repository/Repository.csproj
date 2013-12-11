@@ -73,6 +73,12 @@
     <Compile Include="Models\geo_zipcodes.cs">
       <DependentUpon>DataModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\register_date_type.cs">
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\register_travel.cs">
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\routing_operators.cs">
       <DependentUpon>DataModels.tt</DependentUpon>
     </Compile>
