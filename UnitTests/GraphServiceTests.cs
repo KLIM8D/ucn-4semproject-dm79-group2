@@ -26,7 +26,7 @@ namespace UnitTests
         [TestMethod]
         public void TestRoute()
         {
-            var list = _graphService.GetDirections(1, 5);
+            var list = _graphService.GetDirections(194, 97);
 
             Assert.IsNotNull(list);
         }

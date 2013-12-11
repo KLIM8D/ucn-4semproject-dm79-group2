@@ -112,6 +112,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\CityRepository.cs" />
     <Compile Include="Resources\DepositRepository.cs" />
+    <Compile Include="Resources\RoutingRepository.cs" />
     <Compile Include="Resources\SecurityGroupRepository.cs" />
     <Compile Include="Resources\UserRepository.cs" />
   </ItemGroup>
