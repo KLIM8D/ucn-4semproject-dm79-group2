@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EndpointService.SocketServer;
 
 namespace EndpointService
 {
@@ -10,6 +7,16 @@ namespace EndpointService
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Endpoint for check-in/out backend service\n-----------------------------------------");
+
+            try
+            {
+                Listener.StartListening();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex);
+            }
         }
     }
 }
