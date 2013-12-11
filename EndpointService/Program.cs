@@ -7,7 +7,8 @@ namespace EndpointService
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Endpoint for check-in/out backend service\n-----------------------------------------");
+            Console.WriteLine("Endpoint for check-in/out backend service" +
+                              "\n-----------------------------------------");
 
             try
             {
