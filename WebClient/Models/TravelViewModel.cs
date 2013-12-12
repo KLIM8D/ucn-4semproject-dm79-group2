@@ -7,6 +7,5 @@ namespace WebClient.Models
 {
     public class TravelViewModel
     {
-
     }
 }

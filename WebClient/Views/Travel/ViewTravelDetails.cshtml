@@ -28,13 +28,13 @@
             var a = Model[i];
             <tr style="background-color:@rowColor">
                 <td>
-                    @a.tra_loc_id
+                    @a.transit_locations.tra_loc_title
                 </td>
                 <td>
                     @a.reg_tra_timestamp.ToString("dd-MM-yy HH:mm")
                 </td>
                 <td>
-                    @Model[i + 1].tra_loc_id
+                    @Model[i + 1].transit_locations.tra_loc_title
                 </td>
                 <td>
                     @Model[i + 1].reg_tra_timestamp.ToString("dd-MM-yy HH:mm")
