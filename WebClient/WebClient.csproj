@@ -113,13 +113,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepositController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TravelController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BalanceViewModel.cs" />
     <Compile Include="Models\DepositViewModel.cs" />
     <Compile Include="Models\LogOnModel.cs" />
+    <Compile Include="Models\TravelViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -177,6 +178,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\TestAuth.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Travel\ViewTravelDetails.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

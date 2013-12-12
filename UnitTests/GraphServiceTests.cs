@@ -24,6 +24,15 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void TestTravelPrice()
+        {
+            var price = _graphService.TravelPrice(1, 88);
+            var price2 = _graphService.TravelPrice(1, 1);
+
+            Assert.IsTrue(price > 0 && price2 > 0);
+        }
+
+        [TestMethod]
         public void TestRoute()
         {
             var list = _graphService.GetDirections(194, 97);
