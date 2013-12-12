@@ -1,4 +1,6 @@
-﻿using Repository.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Repository.Models;
 using Repository.Resources;
 
 namespace BusinessLogic.Resources
@@ -11,6 +13,12 @@ namespace BusinessLogic.Resources
             registerRepository.InsertRegisterTravel(registerTravel);
 
             return true;
+        }
+
+        public List<register_travel> GetAllTravelsByUserId(int value)
+        {
+            var registerRepository = new RegisterRepository();
+            return registerRepository.GetRegisterTravelByUserId(value).ToList();
         }
 
         public bool InsertTravelType(register_date_type registerDateType)
