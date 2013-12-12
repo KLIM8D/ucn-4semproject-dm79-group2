@@ -16,6 +16,8 @@ namespace EndpointService.Services
             {               
                 throw;
             }
+
+            return null;
         }
     }
 }

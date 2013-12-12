@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -12,8 +13,8 @@ namespace EndpointService.SocketServer
         public static void StartListening()
         {
             var ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            var ipAddress = ipHostInfo.AddressList[1];
-            var localEndPoint = new IPEndPoint(ipAddress, 11000);
+            var ipAddress = ipHostInfo.AddressList[2];
+            var localEndPoint = new IPEndPoint(ipAddress, 1500);
 
             var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
@@ -27,6 +28,7 @@ namespace EndpointService.SocketServer
                 while (true)
                 {
                     AllDone.Reset();
+                    Console.WriteLine("Something happend!");
                     listener.BeginAccept(AcceptCallback, listener);
                     AllDone.WaitOne();
                 }
@@ -62,6 +64,16 @@ namespace EndpointService.SocketServer
             if (bytesRead > 0)
             {
                 // here be dragons!
+
+                using (var stream = new MemoryStream(state.Buffer))
+                {
+                    var sw = new StreamWriter(stream);
+                    stream.Position = 0;
+                    var sr = new StreamReader(stream);
+                    var myStr = sr.ReadToEnd();
+                    Console.WriteLine(myStr);
+
+                }
             }
         }
     }
