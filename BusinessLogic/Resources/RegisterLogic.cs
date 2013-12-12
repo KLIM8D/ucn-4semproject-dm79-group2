@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Repository.Models;
 using Repository.Resources;
@@ -11,6 +12,16 @@ namespace BusinessLogic.Resources
         {
             var registerRepository = new RegisterRepository();
             registerRepository.InsertRegisterTravel(registerTravel);
+
+            return true;
+        }
+
+        public bool InsTravel()
+        {
+            var dataStream = new DataStream();
+            var registerRepository = new RegisterRepository();
+
+            //registerRepository.InsertRegisterTravel(dataStream);
 
             return true;
         }
@@ -28,5 +39,21 @@ namespace BusinessLogic.Resources
 
             return true;
         }
+    }
+
+    public class DataStream
+    {
+        public int CardId { get; set; }
+        public int StationId { get; set; }
+        public DateTime TimeStamp { get; set; }
+        public int Type { get; set; }
+
+        //public register_travel ToDataObj()
+        //{
+        //    register_travel obj = new register_travel
+        //    {
+        //        reg_tra_timestamp = TimeStamp           
+        //    }
+        //}
     }
 }

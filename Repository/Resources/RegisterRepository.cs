@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using Repository.Models;
 
 namespace Repository.Resources
@@ -21,7 +22,7 @@ namespace Repository.Resources
 
         public IQueryable<register_travel> GetRegisterTravelByUserId(int value)
         {
-            return _db.register_travel.Where(x => x.usr_det_id.Equals(value));
+            return _db.register_travel.Where(x => x.usr_det_id.Equals(value)).Include(t => t.transit_locations);
         }
 
         public register_date_type InsertRegisterDateType(register_date_type registerDateType)

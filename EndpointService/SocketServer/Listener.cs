@@ -3,6 +3,8 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using BusinessLogic.Resources;
+using Utils.Serialization;
 
 namespace EndpointService.SocketServer
 {
@@ -65,7 +67,7 @@ namespace EndpointService.SocketServer
             using (var stream = new MemoryStream(state.Buffer))
             {
                 stream.Position = 0;
-                var str = new StreamReader(stream).ReadToEnd();
+                JsonHelper.DeserializeJson<BusinessLogic.Resources.DataStream>(new StreamReader(stream).ReadToEnd());
             }
         }
     }
