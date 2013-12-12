@@ -13,7 +13,7 @@ namespace EndpointService.SocketServer
         public static void StartListening()
         {
             var ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            var ipAddress = ipHostInfo.AddressList[2];
+            var ipAddress = ipHostInfo.AddressList[2]; // change the value to the corresponding nic (usually 1)
             var localEndPoint = new IPEndPoint(ipAddress, 1500);
 
             var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -61,19 +61,14 @@ namespace EndpointService.SocketServer
 
             var bytesRead = handler.EndReceive(ar);
 
-            if (bytesRead > 0)
+            if (bytesRead <= 0) return;
+
+            using (var stream = new MemoryStream(state.Buffer))
             {
-                // here be dragons!
-
-                using (var stream = new MemoryStream(state.Buffer))
-                {
-                    var sw = new StreamWriter(stream);
-                    stream.Position = 0;
-                    var sr = new StreamReader(stream);
-                    var myStr = sr.ReadToEnd();
-                    Console.WriteLine(myStr);
-
-                }
+                stream.Position = 0;
+                var sr = new StreamReader(stream);
+                var myStr = sr.ReadToEnd();
+                Console.WriteLine(myStr);
             }
         }
     }
