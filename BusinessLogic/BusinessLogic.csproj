@@ -43,6 +43,7 @@
     <Compile Include="Resources\AuthorizeService.cs" />
     <Compile Include="Resources\DepositLogic.cs" />
     <Compile Include="Resources\GraphService.cs" />
+    <Compile Include="Resources\RegisterLogic.cs" />
     <Compile Include="Resources\TravelCardLogic.cs" />
     <Compile Include="Resources\UserLogic.cs" />
   </ItemGroup>

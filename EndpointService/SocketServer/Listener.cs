@@ -28,7 +28,6 @@ namespace EndpointService.SocketServer
                 while (true)
                 {
                     AllDone.Reset();
-                    Console.WriteLine("Something happend!");
                     listener.BeginAccept(AcceptCallback, listener);
                     AllDone.WaitOne();
                 }
@@ -66,9 +65,7 @@ namespace EndpointService.SocketServer
             using (var stream = new MemoryStream(state.Buffer))
             {
                 stream.Position = 0;
-                var sr = new StreamReader(stream);
-                var myStr = sr.ReadToEnd();
-                Console.WriteLine(myStr);
+                var str = new StreamReader(stream).ReadToEnd();
             }
         }
     }
