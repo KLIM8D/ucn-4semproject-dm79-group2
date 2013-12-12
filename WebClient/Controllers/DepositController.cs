@@ -11,11 +11,6 @@ namespace WebClient.Controllers
 {
     public class DepositController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         [AuthorizeUser(Role = "User")]
         public ActionResult DepositMoney()
         {

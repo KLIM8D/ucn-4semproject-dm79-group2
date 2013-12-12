@@ -5,8 +5,8 @@ using System.Web;
 
 namespace WebClient.Models
 {
-    public class BalanceViewModel
+    public class TravelViewModel
     {
-        public double Balance;
+
     }
 }

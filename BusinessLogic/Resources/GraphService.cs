@@ -82,5 +82,11 @@ namespace BusinessLogic.Resources
 
             return returnList;
         }
+
+        public int TravelPrice(int startId, int endId)
+        {
+            int i = GetDirections(startId, endId).Count;
+            return i == 1 ? 20 : i*10; // if you travel in 1 zone you pay 20, if you travel more than 1 zone you pay 10 for each zone
+        }
     }
 }
