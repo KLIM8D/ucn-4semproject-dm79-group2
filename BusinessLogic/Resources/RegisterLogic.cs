@@ -8,20 +8,12 @@ namespace BusinessLogic.Resources
 {
     public class RegisterLogic
     {
-        public bool InsertTravel(register_travel registerTravel)
-        {
-            var registerRepository = new RegisterRepository();
-            registerRepository.InsertRegisterTravel(registerTravel);
-
-            return true;
-        }
-
-        public bool InsTravel()
+        public bool InsertTravel()
         {
             var dataStream = new DataStream();
             var registerRepository = new RegisterRepository();
 
-            //registerRepository.InsertRegisterTravel(dataStream);
+            registerRepository.InsertRegisterTravel(dataStream.ToDataObj());
 
             return true;
         }
@@ -48,12 +40,20 @@ namespace BusinessLogic.Resources
         public DateTime TimeStamp { get; set; }
         public int Type { get; set; }
 
-        //public register_travel ToDataObj()
-        //{
-        //    register_travel obj = new register_travel
-        //    {
-        //        reg_tra_timestamp = TimeStamp           
-        //    }
-        //}
+        public register_travel ToDataObj()
+        {
+            var transitLogic = new TransitLogic();
+            var userLogic = new UserLogic();
+
+            var obj = new register_travel
+            {
+                tra_loc_id = transitLogic.GetLocationIdFromArea(StationId),
+                usr_det_id = userLogic.GetUserIdByCardNo(CardId),
+                reg_tra_timestamp = TimeStamp,
+                reg_dat_typ_id = Type
+            };
+
+            return obj;
+        }
     }
 }

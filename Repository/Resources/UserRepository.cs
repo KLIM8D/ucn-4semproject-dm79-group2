@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -73,6 +74,12 @@ namespace Repository.Resources
         public bool ValidateCred(string userName, string password)
         {
             return db.security_credentials.Any(x => x.sec_cre_uname.Equals(userName) && x.sec_cre_passwd.Equals(password));
+        }
+
+        public int GetUidByCardNo(int value)
+        {
+            var cardIssued = db.card_issued.FirstOrDefault(x => x.car_iss_no.Equals(value));
+            return cardIssued != null ? cardIssued.usr_det_id : 0;
         }
     }
 }

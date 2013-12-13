@@ -117,6 +117,7 @@
     <Compile Include="Resources\RegisterRepository.cs" />
     <Compile Include="Resources\RoutingRepository.cs" />
     <Compile Include="Resources\SecurityGroupRepository.cs" />
+    <Compile Include="Resources\TransitRepository.cs" />
     <Compile Include="Resources\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

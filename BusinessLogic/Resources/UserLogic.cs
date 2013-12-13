@@ -1,7 +1,4 @@
 using System;
-//using Repository.Models;
-using System.Linq;
-using System.Text;
 using Repository.Models;
 using Repository.Resources;
 using Utils.ExtensionMethods;
@@ -82,6 +79,12 @@ namespace BusinessLogic.Resources
             string hashedPassword = new Hashing().SHA512(password);
 
             return new UserRepository().ValidateCred(userName, hashedPassword);
+        }
+
+        public int GetUserIdByCardNo(int value)
+        {
+            var userRepository = new UserRepository();
+            return userRepository.GetUidByCardNo(value);
         }
     }
 }
