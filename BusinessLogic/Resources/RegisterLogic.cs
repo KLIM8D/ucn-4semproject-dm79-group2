@@ -8,12 +8,10 @@ namespace BusinessLogic.Resources
 {
     public class RegisterLogic
     {
-        public bool InsertTravel()
+        public bool InsertTravel(DataStream value)
         {
-            var dataStream = new DataStream();
             var registerRepository = new RegisterRepository();
-
-            registerRepository.InsertRegisterTravel(dataStream.ToDataObj());
+            registerRepository.InsertRegisterTravel(value.ToDataObj());
 
             return true;
         }

@@ -67,8 +67,24 @@ namespace EndpointService.SocketServer
             using (var stream = new MemoryStream(state.Buffer))
             {
                 stream.Position = 0;
-                JsonHelper.DeserializeJson<BusinessLogic.Resources.DataStream>(new StreamReader(stream).ReadToEnd());
+
+                string jsonString = new StreamReader(stream).ReadToEnd();
+                var dateTime = ConvertJsonStringToDateTime(jsonString);
+
+                var obj = JsonHelper.DeserializeJson<DataStream>(jsonString, true);
+                obj.TimeStamp = dateTime;
+
+                new RegisterLogic().InsertTravel(obj);
             }
+        }
+
+        public static DateTime ConvertJsonStringToDateTime(string jsonTime)
+        {
+            if (string.IsNullOrEmpty(jsonTime) || jsonTime.IndexOf("Date", StringComparison.Ordinal) <= -1) return DateTime.Now;
+            var milis = jsonTime.Substring(jsonTime.IndexOf("(", StringComparison.Ordinal) + 1);
+            milis = milis.Substring(0, milis.IndexOf(")", StringComparison.Ordinal));
+            var ret = new DateTime(1970, 1, 1);
+            return ret.AddSeconds(Convert.ToInt64(milis));
         }
     }
 }

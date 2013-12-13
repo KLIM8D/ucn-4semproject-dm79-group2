@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Utils.Serialization
 {
