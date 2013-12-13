@@ -6,97 +6,61 @@
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Opret en ny bruger til rejsekortet</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FirstName)
+        <div> 
+            <div style="width: 75px; float: left;">Username <span style="color: red;">@Html.ValidationMessageFor(model => model.UserName)</span></div>
+            <div style="width: 190px; float: left;" class="short-form">
+                @Html.EditorFor(model => model.UserName)
+            </div>
+            <div style="width: 75px; float: left;">Password <span style="color: red;">@Html.ValidationMessageFor(model => model.Password)</span></div>
+            <div style="width: 190px; float: left;" class="short-form">@Html.EditorFor(model => model.Password)</div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FirstName)
-            <span style="color: red;">@Html.ValidationMessageFor(model => model.FirstName)</span>
+        <div style="clear: both; padding-top: 35px;">
+            <div style="width: 75px; float: left;">Firstname <span style="color: red;">@Html.ValidationMessageFor(model => model.FirstName)</span></div>
+            <div style="width: 190px; float: left;" class="short-form">
+                @Html.EditorFor(model => model.FirstName)
+            </div>
+            <div style="width: 75px; float: left;">Surname <span style="color: red;">@Html.ValidationMessageFor(model => model.SurName)</span></div>
+            <div style="width: 190px; float: left;" class="short-form">@Html.EditorFor(model => model.SurName)</div>
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SurName)
+        <div style="clear: both; padding-top: 5px;">
+            <div style="width: 75px; float: left;">Street <span style="color: red;">@Html.ValidationMessageFor(model => model.Street)</span></div>
+            <div style="width: 440px; float: left;" class=" long-form ">@Html.EditorFor(model => model.Street)</div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SurName)
-             <span style="color: red;">@Html.ValidationMessageFor(model => model.SurName)</span>
+        <div style="clear: both; padding-top: 5px;">
+            <div style="width: 75px; float: left;">Zipcode <span style="color: red;">@Html.ValidationMessageFor(model => model.ZipCode, null, "TxtZipCode")</span></div>
+            <div style="width: 60px; float: left;" class="tiny-form">@Html.EditorFor(model => model.ZipCode)</div>
+            <div style="width: 35px; float: left;">City</div>
+            <div style="width: 345px; float: left;" class="medium-form">
+                <input disabled="disabled" /></div>
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Ssn)
+        <div style="clear: both; padding-top: 35px;">
+            <div style="clear: both;">
+                <div style="width: 75px; float: left;">Phone no. <span style="color: red;">@Html.ValidationMessageFor(model => model.PhoneNo)</span></div>
+                <div style="width: 190px; float: left;" class="short-form">@Html.EditorFor(model => model.PhoneNo)</div>
+                <div style="width: 75px; float: left;">SSN <span style="color: red;">@Html.ValidationMessageFor(model => model.Ssn)</span></div>
+                <div style="width: 190px; float: left;" class="short-form">@Html.EditorFor(model => model.Ssn)</div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Ssn)
-             <span style="color: red;">@Html.ValidationMessageFor(model => model.Ssn)</span>
+        <div style="clear: both; padding-top: 5px;">
+            <div style="width: 75px; float: left;">Email <span style="color: red;">@Html.ValidationMessageFor(model => model.EMail)</span></div>
+            <div style="width: 440px; float: left;" class=" long-form ">@Html.EditorFor(model => model.EMail)</div>
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PhoneNo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PhoneNo)
-             <span style="color: red;">@Html.ValidationMessageFor(model => model.PhoneNo)</span>
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EMail)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EMail)
-             <span style="color: red;">@Html.ValidationMessageFor(model => model.EMail)</span>
-        </div>
-
-        <div class="editor-label">
-             @Html.LabelFor(model => model.Street)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Street)
-             <span style="color: red;">@Html.ValidationMessageFor(model => model.Street)</span>
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ZipCode)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ZipCode, null, "TxtZipCode")
-             <span style="color: red;">@Html.ValidationMessageFor(model => model.ZipCode)</span>
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.City)
-        </div>
-        <div class="editor-field">
+                    <div class="editor-field">
             @Html.TextBoxFor(model => model.City, new 
         { disabled = "disabled", @readonly = "readonly" , @id = "TxtCity"})
-             <span style="color: red;">@Html.ValidationMessageFor(model => model.City)</span>
+        <span style="color: red;">@Html.ValidationMessageFor(model => model.City)</span>
+                        </div>
+        <br />
+        <div>
+            <button type="submit" class="btn btn-default">Opret</button>
         </div>
-        
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UserName)
-             <span style="color: red;">@Html.ValidationMessageFor(model => model.UserName)</span>
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
-             <span style="color: red;">@Html.ValidationMessageFor(model => model.Password)</span>
-        </div>
-
-        <p>
-            <input type="submit" value="Opret" />
-        </p>
     </fieldset>
 }
 
