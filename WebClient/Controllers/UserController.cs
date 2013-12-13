@@ -51,5 +51,15 @@ namespace WebClient.Controllers
 
             return View(model);
         }
+
+        public JsonResult GetCityByZipCode(int zipCode)
+        {
+            var record = new UserLogic().GetCityByZipCode(zipCode);
+            var result = new
+                         {
+                             CityName = record.geo_zip_city ?? "Ikke korrekt postnummer"
+                         };
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

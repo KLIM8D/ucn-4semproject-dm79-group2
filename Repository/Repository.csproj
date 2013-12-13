@@ -119,6 +119,7 @@
     <Compile Include="Resources\SecurityGroupRepository.cs" />
     <Compile Include="Resources\TransitRepository.cs" />
     <Compile Include="Resources\UserRepository.cs" />
+    <Compile Include="Resources\WithdrawRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -86,5 +86,10 @@ namespace BusinessLogic.Resources
             var userRepository = new UserRepository();
             return userRepository.GetUidByCardNo(value);
         }
+
+        public geo_zipcodes GetCityByZipCode(int zipCode)
+        {
+            return _cityRepository.GetCity(zipCode);
+        }
     }
 }
