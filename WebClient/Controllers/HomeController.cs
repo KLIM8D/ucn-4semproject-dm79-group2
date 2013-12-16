@@ -6,6 +6,9 @@ namespace WebClient.Controllers
     {
         public ActionResult Index()
         {
+            if(Request.IsAuthenticated)
+                return View("../Account/Index");
+
             return View();
         }
     }

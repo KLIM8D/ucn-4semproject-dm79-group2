@@ -16,11 +16,11 @@
 
     <table>
         <tr style="background-color: #fff">
-            <td>Start</td>
-            <td>Dato</td>
-            <td>Slut</td>
-            <td>Dato</td>
-            <td>Pris</td>
+            <td style="width: 200px">Start</td>
+            <td style="width: 200px">Dato</td>
+            <td style="width: 200px">Slut</td>
+            <td style="width: 200px">Dato</td>
+            <td style="width: 100px">Pris</td>
         </tr>
         @{ var rowColor = "#fff"; }
         @for (int i = 0; i < Model.Count; i++)
@@ -61,7 +61,3 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index", "Account")
-</div>

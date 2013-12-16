@@ -10,14 +10,14 @@ namespace EndpointService
             Console.WriteLine("Endpoint for check-in/out backend service" +
                               "\n-----------------------------------------");
 
-            try
-            {
+            //try
+            //{
                 Listener.StartListening();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Error: " + ex);
+            //}
         }
     }
 }

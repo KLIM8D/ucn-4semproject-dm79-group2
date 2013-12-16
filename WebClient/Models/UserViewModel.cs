@@ -38,7 +38,6 @@ namespace WebClient.Models
         [DisplayName("Post Nr.")]
         [RegularExpression(@"^\d{4}$", ErrorMessage = "Indtast venligst et 4 cifret post nummer")]
         public int ZipCode { get; set; }
-        [Required(ErrorMessage = "*")]
         public string City { get; set; }
 
         //SecurityCred

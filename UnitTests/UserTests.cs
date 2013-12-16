@@ -43,14 +43,14 @@ namespace UnitTests
         {
             User user = new User
                         {
-                            fname = "Chris",
-                            lname = "Tindbæk",
+                            fname = "Gunhild",
+                            lname = "gunhild",
                             city = "Aalborg",
                             created_timestamp = DateTime.Now,
-                            uname = "Chris",
+                            uname = "Test",
                             email = "CoolEmail@hotmail.com",
                             is_active = true,
-                            passwd = "chrischrischris",
+                            passwd = "omg123",
                             phoneno = 28135473,
                             sec_group = "User",
                             zipcode = 9000,
