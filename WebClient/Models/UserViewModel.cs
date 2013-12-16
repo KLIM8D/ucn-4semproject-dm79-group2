@@ -17,6 +17,7 @@ namespace WebClient.Models
         [Required(ErrorMessage = "*")]
         [DataType(DataType.Text)]
         [DisplayName("CPR Nr.")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Indtast venligst et 10 cifret person nummer")]
         public string Ssn { get; set; }
         [Required(ErrorMessage = "*")]
         [DataType(DataType.PhoneNumber)]

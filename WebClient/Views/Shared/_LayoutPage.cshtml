@@ -21,16 +21,16 @@
                     {
                         <div class="pull-right">
                             <strong style="color: white;">@Html.Encode(User.Identity.Name)</strong>
-                            @Html.ActionLink("Sign Out", "Logout", "Account")
+                            @Html.ActionLink("Log ud", "Logout", "Account")
                         </div>
                     }
                     else
                     {
                         using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "navbar-form pull-right" }))
                         {
-                            @Html.TextBox("UserName", null, new { @class = "form-control signin-form", placeholder = "Username" })
-                            @Html.Password("Password", null, new { @class = "form-control signin-form", placeholder = "Password", style = "margin-left: 6px;" })
-                            <input class="btn btn-success" type="submit" value="Sign in" />
+                            @Html.TextBox("UserName", null, new { @class = "form-control signin-form", placeholder = "Brugernavn" })
+                            @Html.Password("Password", null, new { @class = "form-control signin-form", placeholder = "Kodeord", style = "margin-left: 6px;" })
+                            <input class="btn btn-success" type="submit" value="Log in" />
                         }
                     }
                 </div>

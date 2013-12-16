@@ -4,19 +4,16 @@
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Velkommen</h2>
 @if (Request.IsAuthenticated)
 {
-    <strong>@Html.Encode(User.Identity.Name)</strong>
-    @Html.ActionLink("Sign Out", "Logout", "Account")
-    <div></div>
     <div class="col-6 col-sm-6 col-lg-4">
-        <h3>Make a deposit on your account</h3>
-        @Html.ActionLink("Deposit Money", "DepositMoney", "Deposit", null, new { @class = "btn btn-default" })
+        <h3>Rejsekort indbetaling</h3>
+        @Html.ActionLink("Indbetal", "DepositMoney", "Deposit", null, new { @class = "btn btn-default" })
     </div>
     <div class="col-6 col-sm-6 col-lg-4">
-        <h3>View your travelhistory</h3>
-        @Html.ActionLink("Travelhistory", "ViewTravelDetails", "Travel", null, new { @class = "btn btn-default" })
+        <h3>Se Rejseoversigt</h3>
+        @Html.ActionLink("Rejseoversigt", "ViewTravelDetails", "Travel", null, new { @class = "btn btn-default" })
     </div>
 }
 else

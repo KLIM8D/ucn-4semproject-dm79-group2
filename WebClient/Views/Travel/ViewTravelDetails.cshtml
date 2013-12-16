@@ -2,7 +2,7 @@
 @model List<Repository.Models.register_travel>
 
 @{
-    ViewBag.Title = "ViewTravelDetails";
+    ViewBag.Title = "Rejseoversigt";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
@@ -12,7 +12,7 @@
     @Html.ValidationSummary(true)
 
 
-    <h2>ViewTravelDetails</h2>
+    <h2>Rejseoversigt</h2>
 
     <table>
         <tr style="background-color: #fff">
@@ -54,7 +54,7 @@
     </table>
     
     <div>
-        @Html.ActionLink("Back to Account", "Index", "Account")
+        @Html.ActionLink("Tilbage til konto", "Index", "Account")
     </div>
 
     @section Scripts {
