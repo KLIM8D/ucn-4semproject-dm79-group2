@@ -26,11 +26,12 @@ namespace BusinessLogic.Resources
         public Dictionary<int, bool> Visited { get; set; }
         public Dictionary<routing_zones, routing_zones> Nodes { get; set; }
         private RoutingRepository RouteRepo;
-        private RegisterRepository registerRepo;
+        private RegisterRepository RegisterRepo;
 
         public GraphService()
         {
             RouteRepo = new RoutingRepository();
+            RegisterRepo = new RegisterRepository();
             Vertices = RouteRepo.GetAllZonesWithNeighbors().ToList();
         }
 
@@ -94,10 +95,15 @@ namespace BusinessLogic.Resources
         /// <returns>price</returns>
         public int TravelPrice(int userId, int startId, int endId)
         {
-            int i = GetDirections(startId, endId).Count;
-            if (registerRepo.IsAContinuedJourney(userId))
+            List<routing_zones> listz = GetDirections(startId, endId);
+            int i = listz.Count;
+            var list = RegisterRepo.IsAContinuedJourney(userId);
+            if (list != null)
             {
-                return i*10 - 10;
+                var liste1 = GetDirections(list.FirstOrDefault().transit_locations.routing_zones.rot_zon_area_id, list.ToList()[1].transit_locations.routing_zones.rot_zon_area_id);
+                var listlist = listz.Except(liste1);
+
+                return listlist.Count()*10;
             }
             return i == 1 ? 20 : i*10;
         }

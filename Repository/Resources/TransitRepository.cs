@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using Repository.Models;
 
 namespace Repository.Resources
@@ -12,10 +13,9 @@ namespace Repository.Resources
             _db = new RKConn();
         }
 
-        public int GetTransitIdFromAreaId(int value)
+        public transit_locations GetAreaFromStationId(int value)
         {
-            var transitLocations = _db.transit_locations.FirstOrDefault(x => x.tra_loc_area_id.Equals(value));
-            return transitLocations != null ? transitLocations.tra_loc_id : 0;
+            return _db.transit_locations.Where(x => x.tra_loc_id.Equals(value)).Include(y => y.routing_zones.transit_locations).FirstOrDefault();
         }
     }
 }

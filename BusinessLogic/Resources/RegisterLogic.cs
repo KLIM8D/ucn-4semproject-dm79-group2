@@ -29,12 +29,6 @@ namespace BusinessLogic.Resources
 
             return true;
         }
-
-        public bool x(int y)
-        {
-            var registerRepository = new RegisterRepository();
-            return registerRepository.IsAContinuedJourney(y);
-        }
     }
 
     public class DataStream

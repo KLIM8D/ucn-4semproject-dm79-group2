@@ -3,12 +3,22 @@ using Repository.Resources;
 
 namespace BusinessLogic.Resources
 {
-    class TransitLogic
+    public class TransitLogic
     {
+        private TransitRepository _repo;
+
+        public TransitLogic()
+        {
+            _repo = new TransitRepository();
+        }
         public int GetLocationIdFromArea(int value)
         {
-            var transitRepository = new TransitRepository();
-            return transitRepository.GetTransitIdFromAreaId(value);
+            return _repo.GetAreaFromStationId(value).tra_loc_id;
+        }
+
+        public int GetAreaIdFromStationId(int value)
+        {
+            return _repo.GetAreaFromStationId(value).tra_loc_area_id;
         }
     }
 }

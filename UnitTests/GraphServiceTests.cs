@@ -19,9 +19,11 @@ namespace UnitTests
     {
 
         private GraphService _graphService;
+        private TransitLogic _transitLogic;
         public GraphServiceTests()
         {
             _graphService = new GraphService();
+            _transitLogic = new TransitLogic();
         }
 
         [TestMethod]
@@ -49,6 +51,24 @@ namespace UnitTests
             var listlist = list.Except(list2);
 
             Assert.IsNull(listlist);
+        }
+
+        [TestMethod]
+        public void TestContinousTravel()
+        {
+            int price = _graphService.TravelPrice(12, 1, 88);
+
+            Assert.IsTrue(price == 0);
+        }
+
+        [TestMethod]
+        public void TestNonContinousTravel()
+        {
+            var zone = _transitLogic.GetAreaIdFromStationId(2089);
+            var zone2 = _transitLogic.GetAreaIdFromStationId(63);
+            int price = _graphService.TravelPrice(12, zone, zone2);
+
+            Assert.IsTrue(price > 0);
         }
 
         [TestMethod]
