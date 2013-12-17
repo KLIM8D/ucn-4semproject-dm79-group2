@@ -26,6 +26,7 @@ namespace BusinessLogic.Resources
         public Dictionary<int, bool> Visited { get; set; }
         public Dictionary<routing_zones, routing_zones> Nodes { get; set; }
         private RoutingRepository RouteRepo;
+        private RegisterRepository registerRepo;
 
         public GraphService()
         {
@@ -83,10 +84,22 @@ namespace BusinessLogic.Resources
             return returnList;
         }
 
-        public int TravelPrice(int startId, int endId)
+        /// <summary>
+        /// if you travel in 1 zone you pay 20, if you travel more than 1 zone you pay 10 for each zone.
+        /// if another travel has been made within an hour its a continuous travel
+        /// much skill, so wow
+        /// </summary>
+        /// <param name="startId"></param>
+        /// <param name="endId"></param>
+        /// <returns>price</returns>
+        public int TravelPrice(int userId, int startId, int endId)
         {
             int i = GetDirections(startId, endId).Count;
-            return i == 1 ? 20 : i*10; // if you travel in 1 zone you pay 20, if you travel more than 1 zone you pay 10 for each zone
+            if (registerRepo.IsAContinuedJourney(userId))
+            {
+                return i*10 - 10;
+            }
+            return i == 1 ? 20 : i*10;
         }
     }
 }

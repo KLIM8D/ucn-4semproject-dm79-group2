@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -26,8 +27,8 @@ namespace UnitTests
         [TestMethod]
         public void TestTravelPrice()
         {
-            var price = _graphService.TravelPrice(1, 88);
-            var price2 = _graphService.TravelPrice(1, 1);
+            var price = _graphService.TravelPrice(1, 1, 88);
+            var price2 = _graphService.TravelPrice(1, 1, 1);
 
             Assert.IsTrue(price > 0 && price2 > 0);
         }
@@ -38,6 +39,16 @@ namespace UnitTests
             var list = _graphService.GetDirections(194, 97);
 
             Assert.IsNotNull(list);
+        }
+
+        [TestMethod]
+        public void TestRouteReversals()
+        {
+            var list = _graphService.GetDirections(62, 26);
+            var list2 = _graphService.GetDirections(26, 62);
+            var listlist = list.Except(list2);
+
+            Assert.IsNull(listlist);
         }
 
         [TestMethod]
