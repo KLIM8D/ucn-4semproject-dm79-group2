@@ -11,8 +11,18 @@ namespace BusinessLogic.Resources
         public bool InsertTravel(DataStream value)
         {
             var registerRepository = new RegisterRepository();
-            registerRepository.InsertRegisterTravel(value.ToDataObj());
+            var withdrawRepo = new WithdrawRepository();
+            var obj = value.ToDataObj();
+            var latestTravel = registerRepository.GetLatestTravelsByUserId(obj.usr_det_id);
+            registerRepository.InsertRegisterTravel(obj);
 
+            var fare = new GraphService().TravelPrice(obj.usr_det_id, latestTravel.tra_loc_id, obj.tra_loc_id);
+            withdrawRepo.InsertWithdraw(new vault_withdraws()
+                                        {
+                                            usr_det_id = obj.usr_det_id,
+                                            vau_wit_amount = fare,
+                                            vau_wit_timestamp = obj.reg_tra_timestamp
+                                        });
             return true;
         }
 

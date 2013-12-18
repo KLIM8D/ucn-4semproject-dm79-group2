@@ -10,18 +10,22 @@ namespace BusinessLogic.Resources
 {
     public class WithdrawLogic
     {
-        public bool SaveDeposit(vault_withdraws withdraw)
+        private readonly WithdrawRepository _withdrawRepository;
+        public WithdrawLogic()
         {
-            var withdrawRepository = new WithdrawRepository();
-            withdrawRepository.InsertWithdraw(withdraw);
+            _withdrawRepository = new WithdrawRepository();
+        }
+
+        public bool SaveWithdraw(vault_withdraws withdraw)
+        {
+            _withdrawRepository.InsertWithdraw(withdraw);
 
             return true;
         }
 
         public IQueryable<vault_withdraws> GetWithdrawsByUserId(int userId)
         {
-            var withdrawRepository = new WithdrawRepository();
-            return withdrawRepository.GetWithdrawsByUser(userId);
+            return _withdrawRepository.GetWithdrawsByUser(userId);
         }
     }
 }

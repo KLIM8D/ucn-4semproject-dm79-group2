@@ -51,6 +51,7 @@
     <Compile Include="Resources\TransitLogic.cs" />
     <Compile Include="Resources\TravelCardLogic.cs" />
     <Compile Include="Resources\UserLogic.cs" />
+    <Compile Include="Resources\WithdrawLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Repository\Repository.csproj">

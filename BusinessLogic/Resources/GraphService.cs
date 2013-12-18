@@ -100,6 +100,7 @@ namespace BusinessLogic.Resources
             var list = RegisterRepo.IsAContinuedJourney(userId);
             if (list != null)
             {
+                list.Reverse();
                 var liste1 = GetDirections(list.FirstOrDefault().transit_locations.routing_zones.rot_zon_area_id, list.ToList()[1].transit_locations.routing_zones.rot_zon_area_id);
                 var listlist = listz.Except(liste1);
 

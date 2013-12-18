@@ -27,9 +27,16 @@ namespace Repository.Resources
             return _db.register_travel.Where(x => x.usr_det_id.Equals(value)).Include(t => t.transit_locations);
         }
 
+        public register_travel GetLatestTravelsByUserId(int value)
+        {
+            return _db.register_travel.Where(x => x.usr_det_id.Equals(value))
+                .OrderByDescending(x => x.reg_tra_timestamp).FirstOrDefault();
+        }
+
         public IQueryable<register_travel> IsAContinuedJourney(int userId)
         {
-            var call1 = _db.register_travel.Where(x => x.usr_det_id.Equals(userId) && x.reg_dat_typ_id == 1)
+            var date = DateTime.Now.AddHours(-1);
+            var call1 = _db.register_travel.Where(x => x.usr_det_id.Equals(userId) && x.reg_dat_typ_id == 1 && x.reg_tra_timestamp >= date)
                     .OrderByDescending(y => y.reg_tra_timestamp).Take(2);
             if (call1.Count() < 2)
                 return null;
@@ -41,9 +48,9 @@ namespace Repository.Resources
                 return null;
 
             return
-                _db.register_travel.Where(x => x.usr_det_id.Equals(userId))
-                    .OrderByDescending(y => y.reg_tra_timestamp).Include(h => h.transit_locations.routing_zones)
-                    .Take(4).OrderBy(t => t.reg_tra_timestamp).Take(2); //Birds droppin from the sky
+                _db.register_travel.Where(x => x.usr_det_id.Equals(userId) 
+                    && x.reg_tra_timestamp >= date).Take(4)
+                    .OrderByDescending(y => y.reg_tra_timestamp).Include(h => h.transit_locations.routing_zones).Take(2); //Birds droppin from the sky
         }
 
         public register_date_type InsertRegisterDateType(register_date_type registerDateType)

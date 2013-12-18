@@ -155,7 +155,7 @@
           <Property Name="vau_wit-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="usr_det-id" Type="int" Nullable="false" />
           <Property Name="vau_wit-amount" Type="money" Nullable="false" />
-          <Property Name="vau_wit-timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="vau_wit-timestamp" Type="timestamp" StoreGeneratedPattern="None" Nullable="false" />
         </EntityType>
         <Association Name="geo_zip-usr_adr">
           <End Role="geo_zipcodes" Type="Self.geo_zipcodes" Multiplicity="1" />
@@ -639,7 +639,7 @@
           <Property Name="vau_wit_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="usr_det_id" Type="Int32" Nullable="false" />
           <Property Name="vau_wit_amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="vau_wit_timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+          <Property Name="vau_wit_timestamp" Type="DateTime" p1:StoreGeneratedPattern="None" />
           <NavigationProperty Name="user_details" Relationship="DataModels.usr_det_vau_wit" FromRole="vault_withdraws" ToRole="user_details" />
         </EntityType>
         <Association Name="usr_det_car_iss">
