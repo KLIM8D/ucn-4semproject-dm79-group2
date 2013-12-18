@@ -27,9 +27,9 @@ namespace Repository.Resources
             return _db.register_travel.Where(x => x.usr_det_id.Equals(value)).Include(t => t.transit_locations);
         }
 
-        public register_travel GetLatestTravelsByUserId(int value)
+        public register_travel GetLatestTravelsByUserId(int value, int type)
         {
-            return _db.register_travel.Where(x => x.usr_det_id.Equals(value))
+            return _db.register_travel.Where(x => x.usr_det_id.Equals(value) && x.reg_dat_typ_id.Equals(type)).Include(x => x.transit_locations)
                 .OrderByDescending(x => x.reg_tra_timestamp).FirstOrDefault();
         }
 

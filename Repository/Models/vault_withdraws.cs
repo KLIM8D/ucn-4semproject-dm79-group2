@@ -17,7 +17,7 @@ namespace Repository.Models
         public int vau_wit_id { get; set; }
         public int usr_det_id { get; set; }
         public decimal vau_wit_amount { get; set; }
-        public Nullable<System.DateTime> vau_wit_timestamp { get; set; }
+        public System.DateTime vau_wit_timestamp { get; set; }
     
         public virtual user_details user_details { get; set; }
     }

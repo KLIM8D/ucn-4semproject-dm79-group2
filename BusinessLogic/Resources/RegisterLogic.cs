@@ -11,18 +11,27 @@ namespace BusinessLogic.Resources
         public bool InsertTravel(DataStream value)
         {
             var registerRepository = new RegisterRepository();
+            var transitLogic = new TransitLogic();
             var withdrawRepo = new WithdrawRepository();
             var obj = value.ToDataObj();
-            var latestTravel = registerRepository.GetLatestTravelsByUserId(obj.usr_det_id);
             registerRepository.InsertRegisterTravel(obj);
+            if (obj.reg_dat_typ_id == 2)
+            {
+                var latestTravel = registerRepository.GetLatestTravelsByUserId(obj.usr_det_id, 1);
 
-            var fare = new GraphService().TravelPrice(obj.usr_det_id, latestTravel.tra_loc_id, obj.tra_loc_id);
-            withdrawRepo.InsertWithdraw(new vault_withdraws()
-                                        {
-                                            usr_det_id = obj.usr_det_id,
-                                            vau_wit_amount = fare,
-                                            vau_wit_timestamp = obj.reg_tra_timestamp
-                                        });
+                var zoneId = transitLogic.GetAreaIdFromStationId(obj.tra_loc_id);
+                var fare = new GraphService().TravelPrice(obj.usr_det_id, latestTravel.transit_locations.tra_loc_area_id, zoneId);
+                if (fare > 0)
+                {
+                    withdrawRepo.InsertWithdraw(new vault_withdraws()
+                                                {
+                                                    usr_det_id = obj.usr_det_id,
+                                                    vau_wit_amount = fare,
+                                                    vau_wit_timestamp = obj.reg_tra_timestamp
+                                                });
+                }
+            }
+
             return true;
         }
 
@@ -50,12 +59,11 @@ namespace BusinessLogic.Resources
 
         public register_travel ToDataObj()
         {
-            var transitLogic = new TransitLogic();
             var userLogic = new UserLogic();
 
             var obj = new register_travel
             {
-                tra_loc_id = transitLogic.GetLocationIdFromArea(StationId),
+                tra_loc_id = StationId,
                 usr_det_id = userLogic.GetUserIdByCardNo(CardId),
                 reg_tra_timestamp = TimeStamp,
                 reg_dat_typ_id = Type

@@ -80,11 +80,17 @@ namespace EndpointService.SocketServer
 
         public static DateTime ConvertJsonStringToDateTime(string jsonTime)
         {
-            if (string.IsNullOrEmpty(jsonTime) || jsonTime.IndexOf("Date", StringComparison.Ordinal) <= -1) return DateTime.Now;
+            if (string.IsNullOrEmpty(jsonTime) || jsonTime.IndexOf("Date", StringComparison.Ordinal) <= -1) 
+                return DateTime.Now;
+
             var milis = jsonTime.Substring(jsonTime.IndexOf("(", StringComparison.Ordinal) + 1);
             milis = milis.Substring(0, milis.IndexOf(")", StringComparison.Ordinal));
             var ret = new DateTime(1970, 1, 1);
-            return ret.AddSeconds(Convert.ToInt64(milis));
+            var fuzzyhat = ret.AddSeconds(Convert.ToInt64(milis));
+
+            var zone = TimeZone.CurrentTimeZone;
+
+            return zone.ToLocalTime(fuzzyhat);
         }
     }
 }
