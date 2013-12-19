@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using BusinessLogic.Resources;
@@ -14,19 +16,23 @@ namespace WebClient.Controllers
         [AuthorizeUser(Role = "User")]
         public ActionResult DepositMoney()
         {
-            return View();
+            var model = new DepositViewModel();
+            var _userLogic = new UserLogic();
+            model.Balance = _userLogic.GetBalanceByUserId(_userLogic.GetUserIdByUserName(HttpContext.User.Identity.Name)).ToString("N");
+            return View(model);
         }
 
         [HttpPost]
         [AuthorizeUser(Role = "User")]
         public ActionResult DepositMoney(DepositViewModel model)
         {
+            var _userLogic = new UserLogic();
             if (ModelState.IsValid)
             {
-                UserRepository _userRepo = new UserRepository();
+                
                 var deposit = new vault_depositits()
                                            {
-                                               usr_det_id = _userRepo.GetUserId(HttpContext.User.Identity.Name),
+                                               usr_det_id = _userLogic.GetUserIdByUserName(HttpContext.User.Identity.Name),
                                                vau_dep_timestamp = DateTime.Now,
                                                vau_dep_amount = model.Amount,
                                            };
@@ -35,11 +41,15 @@ namespace WebClient.Controllers
                 if (success)
                 {
                     model.Message = "Success!";
-                    return View(model);
+                }
+                else
+                {
+                    model.Message = "Error!";
                 }
             }
-            model.Message = "Error!";
-            return View();
+            ModelState.Clear();
+            model.Balance = _userLogic.GetBalanceByUserId(_userLogic.GetUserIdByUserName(HttpContext.User.Identity.Name)).ToString("N");
+            return View(model);
         }
 
     }

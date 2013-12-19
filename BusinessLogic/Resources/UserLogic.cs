@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Repository.Models;
 using Repository.Resources;
 using Utils.ExtensionMethods;
@@ -46,7 +48,7 @@ namespace BusinessLogic.Resources
                                       usr_det_timestamp = user.created_timestamp.TryParseDateTime(),
                                       sec_cre_id = userSec.sec_cre_id
                                   };
-                
+
                 userDetails = _userRepo.InsertDetails(userDetails);
 
                 var city = _cityRepository.GetCity(user.zipcode.TryParseInt());
@@ -71,7 +73,7 @@ namespace BusinessLogic.Resources
 
         public bool LoginUser(string userName, string password)
         {
-            if(String.IsNullOrEmpty(userName))
+            if (String.IsNullOrEmpty(userName))
                 throw new Exception("userName cannot be null or empty");
             if (String.IsNullOrEmpty(password))
                 throw new Exception("password cannot be null or empty");
@@ -90,6 +92,28 @@ namespace BusinessLogic.Resources
         public geo_zipcodes GetCityByZipCode(int zipCode)
         {
             return _cityRepository.GetCity(zipCode);
+        }
+
+        public int GetUserIdByUserName(string name)
+        {
+            return _userRepo.GetUserId(name);
+        }
+
+        public decimal GetBalanceByUserId(int userId)
+        {
+            decimal depositTotal = 0;
+            decimal withdrawTotal = 0;
+            List<vault_depositits> deposits = new DepositLogic().GetDepositsByUserId(userId).ToList();
+            foreach (var deposit in deposits)
+            {
+                depositTotal += deposit.vau_dep_amount;
+            }
+            List<vault_withdraws> withdraws = new WithdrawLogic().GetWithdrawsByUserId(userId).ToList();
+            foreach (var withdraw in withdraws)
+            {
+                withdrawTotal += withdraw.vau_wit_amount;
+            }
+            return depositTotal - withdrawTotal;
         }
     }
 }
