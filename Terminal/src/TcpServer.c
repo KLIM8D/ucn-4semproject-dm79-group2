@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #define ERROR   1
 
@@ -61,9 +62,14 @@ int main (int argc, char *argv[])
                inet_ntoa(cliAddr.sin_addr),
                ntohs(cliAddr.sin_port), line);
 
-        /* init line */
-        memset(line, 0x0, MAX_MSG);
+      if ((send(newSd,"success", strlen("success")+1,0))== -1) {
+          fprintf(stderr, "Failure Sending Message\n");
+          close(newSd);
+          break;
       }
+
+      printf("Server:Msg being sent: %s\nNumber of bytes sent: %d\n",line, strlen(line));
+       }
     }
 }
 
