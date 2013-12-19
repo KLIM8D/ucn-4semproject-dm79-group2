@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using BusinessLogic.Resources;
 using Utils.Serialization;
@@ -15,7 +16,7 @@ namespace EndpointService.SocketServer
         public static void StartListening()
         {
             var ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            var ipAddress = ipHostInfo.AddressList[2]; // change the value to the corresponding nic (usually 1)
+            var ipAddress = ipHostInfo.AddressList[2]; // change the value to the corresponding nic (usually 2)
             var localEndPoint = new IPEndPoint(ipAddress, 1500);
 
             var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -68,13 +69,43 @@ namespace EndpointService.SocketServer
             {
                 stream.Position = 0;
 
-                string jsonString = new StreamReader(stream).ReadToEnd();
+                var jsonString = new StreamReader(stream).ReadToEnd();
                 var dateTime = ConvertJsonStringToDateTime(jsonString);
 
                 var obj = JsonHelper.DeserializeJson<DataStream>(jsonString, true);
                 obj.TimeStamp = dateTime;
 
-                new RegisterLogic().InsertTravel(obj);
+                try
+                {
+                    // check balance for user, if under xx dkk - then decline fare.
+                    //new RegisterLogic().InsertTravel(obj);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Uh oh, spaghettios: " + ex);
+                }
+            }
+        }
+
+        private static void SendStatus(Socket handler, String data)
+        {
+            var byteData = Encoding.ASCII.GetBytes(data);
+
+            handler.BeginSend(byteData, 0, byteData.Length, 0, SendCallback, handler);
+        }
+
+        private static void SendCallback(IAsyncResult ar)
+        {
+            try
+            {
+                var handler = (Socket)ar.AsyncState;
+
+                handler.Shutdown(SocketShutdown.Both);
+                handler.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Uh oh, spaghettios: " + ex);
             }
         }
 
