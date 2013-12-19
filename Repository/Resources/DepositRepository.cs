@@ -21,5 +21,10 @@ namespace Repository.Resources
             db.vault_depositits.Add(deposit);
             return db.SaveChanges();
         }
+
+        public IQueryable<vault_depositits> GetDepositsByUserId(int userId)
+        {
+            return db.vault_depositits.Where(x => x.usr_det_id.Equals(userId));
+        }
     }
 }

@@ -17,5 +17,11 @@ namespace BusinessLogic.Resources
 
             return true;
         }
+
+        public IQueryable<vault_depositits> GetDepositsByUserId(int userId)
+        {
+            var depositRepository = new DepositRepository();
+            return depositRepository.GetDepositsByUserId(userId);
+        }
     }
 }

@@ -57,17 +57,17 @@ namespace UnitTests
         public void TestContinousTravel()
         {
             int price = _graphService.TravelPrice(12, 1, 88);
-
+            //This test will only pass if the data in the database is actually reflecting a Continous Journey
             Assert.IsTrue(price == 0);
         }
 
         [TestMethod]
         public void TestNonContinousTravel()
         {
-            var zone = _transitLogic.GetAreaIdFromStationId(2089);
+            var zone = _transitLogic.GetAreaIdFromStationId(63);
             var zone2 = _transitLogic.GetAreaIdFromStationId(63);
             int price = _graphService.TravelPrice(12, zone, zone2);
-
+            //This test will only pass if the data in the database is actually not reflecting a Continous Journey
             Assert.IsTrue(price > 0);
         }
 

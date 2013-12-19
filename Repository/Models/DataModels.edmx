@@ -4,12 +4,86 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DataModels.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DataModels.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="DataModelsStoreContainer">
+          <EntitySet Name="card_issued" EntityType="DataModels.Store.card_issued" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="card_retracted" EntityType="DataModels.Store.card_retracted" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="geo_zipcodes" EntityType="DataModels.Store.geo_zipcodes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="register_date_type" EntityType="DataModels.Store.register_date_type" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="register_travel" EntityType="DataModels.Store.register_travel" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="routing_operators" EntityType="DataModels.Store.routing_operators" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="routing_zone_neighbors" EntityType="DataModels.Store.routing_zone_neighbors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="routing_zones" EntityType="DataModels.Store.routing_zones" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="security_credentials" EntityType="DataModels.Store.security_credentials" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="security_groups" EntityType="DataModels.Store.security_groups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="transit_locations" EntityType="DataModels.Store.transit_locations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="transit_type" EntityType="DataModels.Store.transit_type" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="user_address" EntityType="DataModels.Store.user_address" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="user_details" EntityType="DataModels.Store.user_details" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="vault_depositits" EntityType="DataModels.Store.vault_depositits" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="vault_withdraws" EntityType="DataModels.Store.vault_withdraws" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="geo_zip-usr_adr" Association="DataModels.Store.geo_zip-usr_adr">
+            <End Role="geo_zipcodes" EntitySet="geo_zipcodes" />
+            <End Role="user_address" EntitySet="user_address" />
+          </AssociationSet>
+          <AssociationSet Name="reg_dat_typ-reg_tra" Association="DataModels.Store.reg_dat_typ-reg_tra">
+            <End Role="register_date_type" EntitySet="register_date_type" />
+            <End Role="register_travel" EntitySet="register_travel" />
+          </AssociationSet>
+          <AssociationSet Name="rot_opt-rot_zon" Association="DataModels.Store.rot_opt-rot_zon">
+            <End Role="routing_operators" EntitySet="routing_operators" />
+            <End Role="routing_zones" EntitySet="routing_zones" />
+          </AssociationSet>
+          <AssociationSet Name="rot_zon-rot_zon-ngr" Association="DataModels.Store.rot_zon-rot_zon-ngr">
+            <End Role="routing_zones" EntitySet="routing_zones" />
+            <End Role="routing_zone_neighbors" EntitySet="routing_zone_neighbors" />
+          </AssociationSet>
+          <AssociationSet Name="rot_zon-tra_loc" Association="DataModels.Store.rot_zon-tra_loc">
+            <End Role="routing_zones" EntitySet="routing_zones" />
+            <End Role="transit_locations" EntitySet="transit_locations" />
+          </AssociationSet>
+          <AssociationSet Name="sec_cre-usr-det" Association="DataModels.Store.sec_cre-usr-det">
+            <End Role="security_credentials" EntitySet="security_credentials" />
+            <End Role="user_details" EntitySet="user_details" />
+          </AssociationSet>
+          <AssociationSet Name="sec_gro-sec_cre" Association="DataModels.Store.sec_gro-sec_cre">
+            <End Role="security_groups" EntitySet="security_groups" />
+            <End Role="security_credentials" EntitySet="security_credentials" />
+          </AssociationSet>
+          <AssociationSet Name="tra_loc-reg_tra" Association="DataModels.Store.tra_loc-reg_tra">
+            <End Role="transit_locations" EntitySet="transit_locations" />
+            <End Role="register_travel" EntitySet="register_travel" />
+          </AssociationSet>
+          <AssociationSet Name="tra_typ-tra_loc" Association="DataModels.Store.tra_typ-tra_loc">
+            <End Role="transit_type" EntitySet="transit_type" />
+            <End Role="transit_locations" EntitySet="transit_locations" />
+          </AssociationSet>
+          <AssociationSet Name="usr_det-car_iss" Association="DataModels.Store.usr_det-car_iss">
+            <End Role="user_details" EntitySet="user_details" />
+            <End Role="card_issued" EntitySet="card_issued" />
+          </AssociationSet>
+          <AssociationSet Name="usr_det-car_ret" Association="DataModels.Store.usr_det-car_ret">
+            <End Role="user_details" EntitySet="user_details" />
+            <End Role="card_retracted" EntitySet="card_retracted" />
+          </AssociationSet>
+          <AssociationSet Name="usr_det-reg_tra" Association="DataModels.Store.usr_det-reg_tra">
+            <End Role="user_details" EntitySet="user_details" />
+            <End Role="register_travel" EntitySet="register_travel" />
+          </AssociationSet>
+          <AssociationSet Name="usr_det-vau_dep" Association="DataModels.Store.usr_det-vau_dep">
+            <End Role="user_details" EntitySet="user_details" />
+            <End Role="vault_depositits" EntitySet="vault_depositits" />
+          </AssociationSet>
+          <AssociationSet Name="usr_det-vau-wit" Association="DataModels.Store.usr_det-vau-wit">
+            <End Role="user_details" EntitySet="user_details" />
+            <End Role="vault_withdraws" EntitySet="vault_withdraws" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="card_issued">
           <Key>
             <PropertyRef Name="car_iss-id" />
           </Key>
-          <Property Name="car_iss-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="car_iss-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="usr_det-id" Type="int" Nullable="false" />
           <Property Name="car_iss-no" Type="int" Nullable="false" />
           <Property Name="car_iss-timestamp" Type="datetime" Nullable="false" />
@@ -19,7 +93,7 @@
           <Key>
             <PropertyRef Name="car_ret-id" />
           </Key>
-          <Property Name="car_ret-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="car_ret-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="usr_det-id" Type="int" Nullable="false" />
           <Property Name="car_ret-no" Type="int" Nullable="false" />
           <Property Name="car_ret-timestamp" Type="datetime" Nullable="false" />
@@ -28,7 +102,7 @@
           <Key>
             <PropertyRef Name="geo_zip-id" />
           </Key>
-          <Property Name="geo_zip-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="geo_zip-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="geo_zip-code" Type="int" Nullable="false" />
           <Property Name="geo_zip-city" Type="varchar" MaxLength="256" />
         </EntityType>
@@ -36,14 +110,14 @@
           <Key>
             <PropertyRef Name="reg_dat_typ-id" />
           </Key>
-          <Property Name="reg_dat_typ-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="reg_dat_typ-title" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="reg_dat_typ-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="reg_dat_typ-title" Type="varchar" Nullable="false" MaxLength="64" />
         </EntityType>
         <EntityType Name="register_travel">
           <Key>
             <PropertyRef Name="reg_tra-id" />
           </Key>
-          <Property Name="reg_tra-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reg_tra-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="tra_loc-id" Type="int" Nullable="false" />
           <Property Name="usr_det-id" Type="int" Nullable="false" />
           <Property Name="reg_dat_typ-id" Type="int" Nullable="false" />
@@ -53,17 +127,17 @@
           <Key>
             <PropertyRef Name="rot_opt-id" />
           </Key>
-          <Property Name="rot_opt-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rot_opt-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="rot_opt-no" Type="int" Nullable="false" />
-          <Property Name="rot_opt-title" Type="varchar" MaxLength="32" Nullable="false" />
-          <Property Name="rot_opt-title_full" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="rot_opt-title" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="rot_opt-title_full" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="rot_opt-active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="routing_zone_neighbors">
           <Key>
             <PropertyRef Name="rot_zon_ngr-id" />
           </Key>
-          <Property Name="rot_zon_ngr-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rot_zon_ngr-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="rot_zon-id" Type="int" Nullable="false" />
           <Property Name="rot_zon_ngr-area" Type="int" Nullable="false" />
           <Property Name="rot_zon_ngr-active" Type="bit" Nullable="false" />
@@ -72,7 +146,7 @@
           <Key>
             <PropertyRef Name="rot_zon-id" />
           </Key>
-          <Property Name="rot_zon-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rot_zon-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="rot_opt-id" Type="int" Nullable="false" />
           <Property Name="rot_zon-area_id" Type="int" Nullable="false" />
           <Property Name="rot_zon-active" Type="bit" Nullable="false" />
@@ -81,10 +155,10 @@
           <Key>
             <PropertyRef Name="sec_cre-id" />
           </Key>
-          <Property Name="sec_cre-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sec_cre-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="sec_gro-id" Type="int" Nullable="false" />
-          <Property Name="sec_cre-uname" Type="varchar" MaxLength="256" Nullable="false" />
-          <Property Name="sec_cre-passwd" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="sec_cre-uname" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="sec_cre-passwd" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="sec_cre-timestamp" Type="datetime" Nullable="false" />
           <Property Name="sec_cre-active" Type="bit" Nullable="false" />
         </EntityType>
@@ -92,8 +166,8 @@
           <Key>
             <PropertyRef Name="sec_gro-id" />
           </Key>
-          <Property Name="sec_gro-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="sec_gro-title" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="sec_gro-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="sec_gro-title" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="sec_gro-timestamp" Type="datetime" Nullable="false" />
           <Property Name="sec_gro-active" Type="bit" Nullable="false" />
         </EntityType>
@@ -101,40 +175,40 @@
           <Key>
             <PropertyRef Name="tra_loc-id" />
           </Key>
-          <Property Name="tra_loc-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tra_loc-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="tra_typ-id" Type="int" Nullable="false" />
           <Property Name="rot_zon-id" Type="int" Nullable="false" />
           <Property Name="tra_loc-area_id" Type="int" Nullable="false" />
-          <Property Name="tra_loc-title" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="tra_loc-title" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="tra_loc-active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="transit_type">
           <Key>
             <PropertyRef Name="tra_typ-id" />
           </Key>
-          <Property Name="tra_typ-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tra_typ-title" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="tra_typ-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="tra_typ-title" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="tra_typ-active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="user_address">
           <Key>
             <PropertyRef Name="usr_adr-id" />
           </Key>
-          <Property Name="usr_adr-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usr_adr-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="usr_det-id" Type="int" Nullable="false" />
           <Property Name="geo_zip-id" Type="int" Nullable="false" />
-          <Property Name="usr_adr-street" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="usr_adr-street" Type="varchar" Nullable="false" MaxLength="256" />
         </EntityType>
         <EntityType Name="user_details">
           <Key>
             <PropertyRef Name="usr_det-id" />
           </Key>
-          <Property Name="usr_det-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usr_det-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="sec_cre-id" Type="int" Nullable="false" />
-          <Property Name="usr_det-fname" Type="varchar" MaxLength="256" Nullable="false" />
-          <Property Name="usr_det-lname" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="usr_det-fname" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="usr_det-lname" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="usr_det-phoneno" Type="int" Nullable="false" />
-          <Property Name="usr_det-email" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="usr_det-email" Type="varchar" Nullable="false" MaxLength="25" />
           <Property Name="usr_det-timestamp" Type="datetime" Nullable="false" />
           <Property Name="usr_det-active" Type="bit" Nullable="false" />
           <Property Name="usr_det-ssn" Type="varbinary(max)" Nullable="false" />
@@ -143,7 +217,7 @@
           <Key>
             <PropertyRef Name="vau_dep-id" />
           </Key>
-          <Property Name="vau_dep-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vau_dep-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="usr_det-id" Type="int" Nullable="false" />
           <Property Name="vau_dep-amount" Type="money" Nullable="false" />
           <Property Name="vau_dep-timestamp" Type="datetime" />
@@ -152,14 +226,14 @@
           <Key>
             <PropertyRef Name="vau_wit-id" />
           </Key>
-          <Property Name="vau_wit-id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vau_wit-id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="usr_det-id" Type="int" Nullable="false" />
           <Property Name="vau_wit-amount" Type="money" Nullable="false" />
-          <Property Name="vau_wit-timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="vau_wit-timestamp" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="geo_zip-usr_adr">
-          <End Role="geo_zipcodes" Type="Self.geo_zipcodes" Multiplicity="1" />
-          <End Role="user_address" Type="Self.user_address" Multiplicity="*" />
+          <End Role="geo_zipcodes" Type="DataModels.Store.geo_zipcodes" Multiplicity="1" />
+          <End Role="user_address" Type="DataModels.Store.user_address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="geo_zipcodes">
               <PropertyRef Name="geo_zip-id" />
@@ -170,8 +244,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="reg_dat_typ-reg_tra">
-          <End Role="register_date_type" Type="Self.register_date_type" Multiplicity="1" />
-          <End Role="register_travel" Type="Self.register_travel" Multiplicity="*" />
+          <End Role="register_date_type" Type="DataModels.Store.register_date_type" Multiplicity="1" />
+          <End Role="register_travel" Type="DataModels.Store.register_travel" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="register_date_type">
               <PropertyRef Name="reg_dat_typ-id" />
@@ -182,8 +256,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="rot_opt-rot_zon">
-          <End Role="routing_operators" Type="Self.routing_operators" Multiplicity="1" />
-          <End Role="routing_zones" Type="Self.routing_zones" Multiplicity="*" />
+          <End Role="routing_operators" Type="DataModels.Store.routing_operators" Multiplicity="1" />
+          <End Role="routing_zones" Type="DataModels.Store.routing_zones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="routing_operators">
               <PropertyRef Name="rot_opt-id" />
@@ -194,8 +268,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="rot_zon-rot_zon-ngr">
-          <End Role="routing_zones" Type="Self.routing_zones" Multiplicity="1" />
-          <End Role="routing_zone_neighbors" Type="Self.routing_zone_neighbors" Multiplicity="*" />
+          <End Role="routing_zones" Type="DataModels.Store.routing_zones" Multiplicity="1" />
+          <End Role="routing_zone_neighbors" Type="DataModels.Store.routing_zone_neighbors" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="routing_zones">
               <PropertyRef Name="rot_zon-id" />
@@ -206,8 +280,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="rot_zon-tra_loc">
-          <End Role="routing_zones" Type="Self.routing_zones" Multiplicity="1" />
-          <End Role="transit_locations" Type="Self.transit_locations" Multiplicity="*" />
+          <End Role="routing_zones" Type="DataModels.Store.routing_zones" Multiplicity="1" />
+          <End Role="transit_locations" Type="DataModels.Store.transit_locations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="routing_zones">
               <PropertyRef Name="rot_zon-id" />
@@ -218,8 +292,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="sec_cre-usr-det">
-          <End Role="security_credentials" Type="Self.security_credentials" Multiplicity="1" />
-          <End Role="user_details" Type="Self.user_details" Multiplicity="*" />
+          <End Role="security_credentials" Type="DataModels.Store.security_credentials" Multiplicity="1" />
+          <End Role="user_details" Type="DataModels.Store.user_details" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="security_credentials">
               <PropertyRef Name="sec_cre-id" />
@@ -230,8 +304,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="sec_gro-sec_cre">
-          <End Role="security_groups" Type="Self.security_groups" Multiplicity="1" />
-          <End Role="security_credentials" Type="Self.security_credentials" Multiplicity="*" />
+          <End Role="security_groups" Type="DataModels.Store.security_groups" Multiplicity="1" />
+          <End Role="security_credentials" Type="DataModels.Store.security_credentials" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="security_groups">
               <PropertyRef Name="sec_gro-id" />
@@ -242,8 +316,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tra_loc-reg_tra">
-          <End Role="transit_locations" Type="Self.transit_locations" Multiplicity="1" />
-          <End Role="register_travel" Type="Self.register_travel" Multiplicity="*" />
+          <End Role="transit_locations" Type="DataModels.Store.transit_locations" Multiplicity="1" />
+          <End Role="register_travel" Type="DataModels.Store.register_travel" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="transit_locations">
               <PropertyRef Name="tra_loc-id" />
@@ -254,8 +328,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tra_typ-tra_loc">
-          <End Role="transit_type" Type="Self.transit_type" Multiplicity="1" />
-          <End Role="transit_locations" Type="Self.transit_locations" Multiplicity="*" />
+          <End Role="transit_type" Type="DataModels.Store.transit_type" Multiplicity="1" />
+          <End Role="transit_locations" Type="DataModels.Store.transit_locations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="transit_type">
               <PropertyRef Name="tra_typ-id" />
@@ -266,8 +340,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="usr_det-car_iss">
-          <End Role="user_details" Type="Self.user_details" Multiplicity="1" />
-          <End Role="card_issued" Type="Self.card_issued" Multiplicity="*" />
+          <End Role="user_details" Type="DataModels.Store.user_details" Multiplicity="1" />
+          <End Role="card_issued" Type="DataModels.Store.card_issued" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user_details">
               <PropertyRef Name="usr_det-id" />
@@ -278,8 +352,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="usr_det-car_ret">
-          <End Role="user_details" Type="Self.user_details" Multiplicity="1" />
-          <End Role="card_retracted" Type="Self.card_retracted" Multiplicity="*" />
+          <End Role="user_details" Type="DataModels.Store.user_details" Multiplicity="1" />
+          <End Role="card_retracted" Type="DataModels.Store.card_retracted" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user_details">
               <PropertyRef Name="usr_det-id" />
@@ -290,8 +364,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="usr_det-reg_tra">
-          <End Role="user_details" Type="Self.user_details" Multiplicity="1" />
-          <End Role="register_travel" Type="Self.register_travel" Multiplicity="*" />
+          <End Role="user_details" Type="DataModels.Store.user_details" Multiplicity="1" />
+          <End Role="register_travel" Type="DataModels.Store.register_travel" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user_details">
               <PropertyRef Name="usr_det-id" />
@@ -302,8 +376,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="usr_det-vau_dep">
-          <End Role="user_details" Type="Self.user_details" Multiplicity="1" />
-          <End Role="vault_depositits" Type="Self.vault_depositits" Multiplicity="*" />
+          <End Role="user_details" Type="DataModels.Store.user_details" Multiplicity="1" />
+          <End Role="vault_depositits" Type="DataModels.Store.vault_depositits" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user_details">
               <PropertyRef Name="usr_det-id" />
@@ -314,8 +388,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="usr_det-vau-wit">
-          <End Role="user_details" Type="Self.user_details" Multiplicity="1" />
-          <End Role="vault_withdraws" Type="Self.vault_withdraws" Multiplicity="*" />
+          <End Role="user_details" Type="DataModels.Store.user_details" Multiplicity="1" />
+          <End Role="vault_withdraws" Type="DataModels.Store.vault_withdraws" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user_details">
               <PropertyRef Name="usr_det-id" />
@@ -328,80 +402,6 @@
         <Function Name="getUserByUID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="param1" Type="int" Mode="InOut" />
         </Function>
-        <EntityContainer Name="DataModelsStoreContainer">
-          <EntitySet Name="card_issued" EntityType="Self.card_issued" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="card_retracted" EntityType="Self.card_retracted" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="geo_zipcodes" EntityType="Self.geo_zipcodes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="register_date_type" EntityType="Self.register_date_type" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="register_travel" EntityType="Self.register_travel" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="routing_operators" EntityType="Self.routing_operators" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="routing_zone_neighbors" EntityType="Self.routing_zone_neighbors" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="routing_zones" EntityType="Self.routing_zones" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="security_credentials" EntityType="Self.security_credentials" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="security_groups" EntityType="Self.security_groups" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="transit_locations" EntityType="Self.transit_locations" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="transit_type" EntityType="Self.transit_type" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="user_address" EntityType="Self.user_address" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="user_details" EntityType="Self.user_details" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="vault_depositits" EntityType="Self.vault_depositits" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="vault_withdraws" EntityType="Self.vault_withdraws" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="geo_zip-usr_adr" Association="Self.geo_zip-usr_adr">
-            <End Role="geo_zipcodes" EntitySet="geo_zipcodes" />
-            <End Role="user_address" EntitySet="user_address" />
-          </AssociationSet>
-          <AssociationSet Name="reg_dat_typ-reg_tra" Association="Self.reg_dat_typ-reg_tra">
-            <End Role="register_date_type" EntitySet="register_date_type" />
-            <End Role="register_travel" EntitySet="register_travel" />
-          </AssociationSet>
-          <AssociationSet Name="rot_opt-rot_zon" Association="Self.rot_opt-rot_zon">
-            <End Role="routing_operators" EntitySet="routing_operators" />
-            <End Role="routing_zones" EntitySet="routing_zones" />
-          </AssociationSet>
-          <AssociationSet Name="rot_zon-rot_zon-ngr" Association="Self.rot_zon-rot_zon-ngr">
-            <End Role="routing_zones" EntitySet="routing_zones" />
-            <End Role="routing_zone_neighbors" EntitySet="routing_zone_neighbors" />
-          </AssociationSet>
-          <AssociationSet Name="rot_zon-tra_loc" Association="Self.rot_zon-tra_loc">
-            <End Role="routing_zones" EntitySet="routing_zones" />
-            <End Role="transit_locations" EntitySet="transit_locations" />
-          </AssociationSet>
-          <AssociationSet Name="sec_cre-usr-det" Association="Self.sec_cre-usr-det">
-            <End Role="security_credentials" EntitySet="security_credentials" />
-            <End Role="user_details" EntitySet="user_details" />
-          </AssociationSet>
-          <AssociationSet Name="sec_gro-sec_cre" Association="Self.sec_gro-sec_cre">
-            <End Role="security_groups" EntitySet="security_groups" />
-            <End Role="security_credentials" EntitySet="security_credentials" />
-          </AssociationSet>
-          <AssociationSet Name="tra_loc-reg_tra" Association="Self.tra_loc-reg_tra">
-            <End Role="transit_locations" EntitySet="transit_locations" />
-            <End Role="register_travel" EntitySet="register_travel" />
-          </AssociationSet>
-          <AssociationSet Name="tra_typ-tra_loc" Association="Self.tra_typ-tra_loc">
-            <End Role="transit_type" EntitySet="transit_type" />
-            <End Role="transit_locations" EntitySet="transit_locations" />
-          </AssociationSet>
-          <AssociationSet Name="usr_det-car_iss" Association="Self.usr_det-car_iss">
-            <End Role="user_details" EntitySet="user_details" />
-            <End Role="card_issued" EntitySet="card_issued" />
-          </AssociationSet>
-          <AssociationSet Name="usr_det-car_ret" Association="Self.usr_det-car_ret">
-            <End Role="user_details" EntitySet="user_details" />
-            <End Role="card_retracted" EntitySet="card_retracted" />
-          </AssociationSet>
-          <AssociationSet Name="usr_det-reg_tra" Association="Self.usr_det-reg_tra">
-            <End Role="user_details" EntitySet="user_details" />
-            <End Role="register_travel" EntitySet="register_travel" />
-          </AssociationSet>
-          <AssociationSet Name="usr_det-vau_dep" Association="Self.usr_det-vau_dep">
-            <End Role="user_details" EntitySet="user_details" />
-            <End Role="vault_depositits" EntitySet="vault_depositits" />
-          </AssociationSet>
-          <AssociationSet Name="usr_det-vau-wit" Association="Self.usr_det-vau-wit">
-            <End Role="user_details" EntitySet="user_details" />
-            <End Role="vault_withdraws" EntitySet="vault_withdraws" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -639,7 +639,7 @@
           <Property Name="vau_wit_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="usr_det_id" Type="Int32" Nullable="false" />
           <Property Name="vau_wit_amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="vau_wit_timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+          <Property Name="vau_wit_timestamp" Type="DateTime" p1:StoreGeneratedPattern="None" Precision="3" Nullable="false" />
           <NavigationProperty Name="user_details" Relationship="DataModels.usr_det_vau_wit" FromRole="vault_withdraws" ToRole="user_details" />
         </EntityType>
         <Association Name="usr_det_car_iss">

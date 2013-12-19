@@ -13,7 +13,7 @@ namespace BusinessLogic.Resources
         }
         public int GetLocationIdFromArea(int value)
         {
-            return _repo.GetAreaFromStationId(value).tra_loc_id;
+            return _repo.GetAreaFromStationId(value).tra_loc_area_id;
         }
 
         public int GetAreaIdFromStationId(int value)
