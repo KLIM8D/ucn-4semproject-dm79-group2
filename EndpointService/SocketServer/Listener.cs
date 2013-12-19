@@ -77,8 +77,18 @@ namespace EndpointService.SocketServer
 
                 try
                 {
-                    // check balance for user, if under xx dkk - then decline fare.
-                    //new RegisterLogic().InsertTravel(obj);
+                    var userLogic = new UserLogic();
+                    var balance = userLogic.GetBalanceByUserId(userLogic.GetUserIdByCardNo(obj.CardId));
+
+                    if (balance >= 20)
+                    {
+                        new RegisterLogic().InsertTravel(obj);
+                        SendStatus(handler, "OK");
+                    }
+                    else
+                    {
+                        SendStatus(handler, "FAIL");
+                    }
                 }
                 catch (Exception ex)
                 {
