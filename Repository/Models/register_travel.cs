@@ -14,6 +14,11 @@ namespace Repository.Models
     
     public partial class register_travel
     {
+        public register_travel()
+        {
+            this.collection_fares = new HashSet<collection_fares>();
+        }
+    
         public int reg_tra_id { get; set; }
         public int tra_loc_id { get; set; }
         public int usr_det_id { get; set; }
@@ -23,5 +28,6 @@ namespace Repository.Models
         public virtual register_date_type register_date_type { get; set; }
         public virtual transit_locations transit_locations { get; set; }
         public virtual user_details user_details { get; set; }
+        public virtual ICollection<collection_fares> collection_fares { get; set; }
     }
 }

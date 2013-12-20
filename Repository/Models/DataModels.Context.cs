@@ -44,6 +44,7 @@ namespace Repository.Models
         public DbSet<vault_withdraws> vault_withdraws { get; set; }
         public DbSet<register_date_type> register_date_type { get; set; }
         public DbSet<register_travel> register_travel { get; set; }
+        public DbSet<collection_fares> collection_fares { get; set; }
     
         public virtual System.Data.Entity.Core.Objects.ObjectResult<User> GetUserById(ObjectParameter param1)
         {

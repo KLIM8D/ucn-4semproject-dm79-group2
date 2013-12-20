@@ -21,6 +21,7 @@ namespace Repository.Models
             this.vault_depositits = new HashSet<vault_depositits>();
             this.vault_withdraws = new HashSet<vault_withdraws>();
             this.register_travel = new HashSet<register_travel>();
+            this.collection_fares = new HashSet<collection_fares>();
         }
     
         public int usr_det_id { get; set; }
@@ -39,5 +40,6 @@ namespace Repository.Models
         public virtual ICollection<vault_depositits> vault_depositits { get; set; }
         public virtual ICollection<vault_withdraws> vault_withdraws { get; set; }
         public virtual ICollection<register_travel> register_travel { get; set; }
+        public virtual ICollection<collection_fares> collection_fares { get; set; }
     }
 }

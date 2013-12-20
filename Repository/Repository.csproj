@@ -55,6 +55,9 @@
     <Compile Include="Models\card_retracted.cs">
       <DependentUpon>DataModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\collection_fares.cs">
+      <DependentUpon>DataModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -118,6 +121,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\CityRepository.cs" />
     <Compile Include="Resources\DepositRepository.cs" />
+    <Compile Include="Resources\FareCollectionRepository.cs" />
     <Compile Include="Resources\RegisterRepository.cs" />
     <Compile Include="Resources\RoutingRepository.cs" />
     <Compile Include="Resources\SecurityGroupRepository.cs" />

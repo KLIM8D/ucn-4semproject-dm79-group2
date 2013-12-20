@@ -120,7 +120,6 @@
     </Compile>
     <Compile Include="Models\DepositViewModel.cs" />
     <Compile Include="Models\LogOnModel.cs" />
-    <Compile Include="Models\TravelViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

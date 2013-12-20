@@ -35,6 +35,10 @@
         <AssociationConnector Association="DataModels.reg_dat_typ_reg_tra" />
         <AssociationConnector Association="DataModels.tra_loc_reg_tra" />
         <AssociationConnector Association="DataModels.usr_det_reg_tra" />
+        <EntityTypeShape EntityType="DataModels.collection_fares" Width="1.5" PointX="10.375" PointY="10.375" />
+        <AssociationConnector Association="DataModels.reg_tra_col_far" />
+        <AssociationConnector Association="DataModels.vau_wit_col_far" />
+        <AssociationConnector Association="DataModels.usr_det_col_far" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
