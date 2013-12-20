@@ -30,13 +30,13 @@ namespace BusinessLogic.Resources
                                                     vau_wit_amount = fare,
                                                     vau_wit_timestamp = obj.reg_tra_timestamp
                                                 });
-                    var latestWithdraw = withdrawRepo.GetLatestWithdrawsByUserId(obj.usr_det_id, obj.reg_tra_timestamp);
-                    fareCollectionRepo.InsertFareCollection(new collection_fares()
-                                                            {
-                                                                reg_tra_id = latestTravel.reg_tra_id,
-                                                                usr_det_id = obj.usr_det_id,
-                                                                vau_wit_id = latestWithdraw.vau_wit_id
-                                                            });
+                    //var latestWithdraw = withdrawRepo.GetLatestWithdrawsByUserId(obj.usr_det_id, obj.reg_tra_timestamp);
+                    //fareCollectionRepo.InsertFareCollection(new collection_fares()
+                    //                                        {
+                    //                                            reg_tra_id = latestTravel.reg_tra_id,
+                    //                                            usr_det_id = obj.usr_det_id,
+                    //                                            vau_wit_id = latestWithdraw.vau_wit_id
+                    //                                        });
                 }
             }
 
