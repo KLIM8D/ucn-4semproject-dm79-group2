@@ -1,0 +1,181 @@
+CREATE TABLE "card_issued"  ( 
+	"car_iss-id"       	int IDENTITY(1,1) NOT NULL,
+	"usr_det-id"       	int NOT NULL,
+	"car_iss-no"       	int NOT NULL,
+	"car_iss-timestamp"	datetime NOT NULL,
+	"car_iss-active"   	bit NOT NULL,
+	CONSTRAINT "pk_card_issued" PRIMARY KEY CLUSTERED("car_iss-id")
+)
+GO
+CREATE TABLE "card_retracted"  ( 
+	"car_ret-id"       	int IDENTITY(1,1) NOT NULL,
+	"usr_det-id"       	int NOT NULL,
+	"car_ret-no"       	int NOT NULL,
+	"car_ret-timestamp"	datetime NOT NULL,
+	CONSTRAINT "pk_card_retracted" PRIMARY KEY CLUSTERED("car_ret-id")
+)
+GO
+CREATE TABLE "geo_zipcodes"  ( 
+	"geo_zip-id"  	int IDENTITY(1,1) NOT NULL,
+	"geo_zip-code"	int NOT NULL,
+	"geo_zip-city"	varchar(256) NULL,
+	CONSTRAINT "pk_geo_zipcodes" PRIMARY KEY CLUSTERED("geo_zip-id")
+)
+GO
+CREATE TABLE "routing_operators"  ( 
+	"rot_opt-id"        	int IDENTITY(1,1) NOT NULL,
+	"rot_opt-no"        	int NOT NULL,
+	"rot_opt-title"     	varchar(32) NOT NULL,
+	"rot_opt-title_full"	varchar(256) NOT NULL,
+	"rot_opt-active"    	bit NOT NULL,
+	CONSTRAINT "pk_routing_operator" PRIMARY KEY CLUSTERED("rot_opt-id")
+)
+GO
+CREATE TABLE "routing_zone_neighbors"  ( 
+	"rot_zon_ngr-id"    	int IDENTITY(1,1) NOT NULL,
+	"rot_zon-id"        	int NOT NULL,
+	"rot_zon_ngr-area"  	int NOT NULL,
+	"rot_zon_ngr-active"	bit NOT NULL,
+	CONSTRAINT "pk_routing_zone_neighbors" PRIMARY KEY CLUSTERED("rot_zon_ngr-id")
+)
+GO
+CREATE TABLE "routing_zones"  ( 
+	"rot_zon-id"     	int IDENTITY(1,1) NOT NULL,
+	"rot_opt-id"     	int NOT NULL,
+	"rot_zon-area_id"	int NOT NULL,
+	"rot_zon-active" 	bit NOT NULL,
+	CONSTRAINT "pk_routing_zones" PRIMARY KEY CLUSTERED("rot_zon-id")
+)
+GO
+CREATE TABLE "security_credentials"  ( 
+	"sec_cre-id"       	int IDENTITY(1,1) NOT NULL,
+	"sec_gro-id"       	int NOT NULL,
+	"sec_cre-uname"    	varchar(256) NOT NULL,
+	"sec_cre-passwd"   	varchar(256) NOT NULL,
+	"sec_cre-timestamp"	datetime NOT NULL,
+	"sec_cre-active"   	bit NOT NULL,
+	CONSTRAINT "pk_security_credentials" PRIMARY KEY CLUSTERED("sec_cre-id")
+)
+GO
+CREATE TABLE "security_groups"  ( 
+	"sec_gro-id"       	int IDENTITY(1,1) NOT NULL,
+	"sec_gro-title"    	varchar(256) NOT NULL,
+	"sec_gro-timestamp"	datetime NOT NULL,
+	"sec_gro-active"   	bit NOT NULL,
+	CONSTRAINT "pk_security_groups" PRIMARY KEY CLUSTERED("sec_gro-id")
+)
+GO
+CREATE TABLE "transit_locations"  ( 
+	"tra_loc-id"     	int IDENTITY(1,1) NOT NULL,
+	"tra_typ-id"     	int NOT NULL,
+	"rot_zon-id"     	int NOT NULL,
+	"tra_loc-area_id"	int NOT NULL,
+	"tra_loc-title"  	varchar(256) NOT NULL,
+	"tra_loc-active" 	bit NOT NULL,
+	CONSTRAINT "pk_transit_locations" PRIMARY KEY CLUSTERED("tra_loc-id")
+)
+GO
+CREATE TABLE "transit_type"  ( 
+	"tra_typ-id"    	int IDENTITY(1,1) NOT NULL,
+	"tra_typ-title" 	varchar(256) NOT NULL,
+	"tra_typ-active"	bit NOT NULL,
+	CONSTRAINT "pk_transit_type" PRIMARY KEY CLUSTERED("tra_typ-id")
+)
+GO
+CREATE TABLE "user_address"  ( 
+	"usr_adr-id"    	int IDENTITY(1,1) NOT NULL,
+	"usr_det-id"    	int NOT NULL,
+	"geo_zip-id"    	int NOT NULL,
+	"usr_det-street"	varchar(256) NOT NULL,
+	CONSTRAINT "pk_user_address" PRIMARY KEY CLUSTERED("usr_adr-id")
+)
+GO
+CREATE TABLE "user_details"  ( 
+	"usr_det-id"       	int IDENTITY(1,1) NOT NULL,
+	"sec_cre-id"       	int NOT NULL,
+	"usr_det-fname"    	varchar(256) NOT NULL,
+	"usr_det-lname"    	varchar(256) NOT NULL,
+	"usr_det-ssn"      	varbinary(1024) NOT NULL,
+	"usr_det-phonono"  	int NOT NULL,
+	"usr_det-email"    	varchar(256) NOT NULL,
+	"usr_det-timestamp"	datetime NOT NULL,
+	"usr_det-active"   	bit NOT NULL,
+	CONSTRAINT "pk_user_details" PRIMARY KEY CLUSTERED("usr_det-id")
+)
+GO
+CREATE TABLE "vault_depositits"  ( 
+	"vau_dep-id"       	int IDENTITY(1,1) NOT NULL,
+	"usr_det-id"       	int NOT NULL,
+	"vau_dep-amount"   	money NOT NULL,
+	"vau_dep-timestamp"	timestamp NOT NULL,
+	CONSTRAINT "pk_vault_depositits" PRIMARY KEY CLUSTERED("vau_dep-id")
+)
+GO
+CREATE TABLE "vault_withdraws"  ( 
+	"vau_wit-id"       	int IDENTITY(1,1) NOT NULL,
+	"usr_det-id"       	int NOT NULL,
+	"vau_wit-amount"   	money NOT NULL,
+	"vau_wit-timestamp"	timestamp NOT NULL,
+	CONSTRAINT "pk_vault_withdraws" PRIMARY KEY CLUSTERED("vau_wit-id")
+)
+GO
+ALTER TABLE "user_address"
+	ADD CONSTRAINT "geo_zip-usr_adr"
+	FOREIGN KEY("geo_zip-id")
+	REFERENCES "geo_zipcodes"("geo_zip-id")
+GO
+ALTER TABLE "routing_zones"
+	ADD CONSTRAINT "rot_opt-rot_zon"
+	FOREIGN KEY("rot_opt-id")
+	REFERENCES "routing_operators"("rot_opt-id")
+GO
+ALTER TABLE "routing_zone_neighbors"
+	ADD CONSTRAINT "rot_zon-rot_zon-ngr"
+	FOREIGN KEY("rot_zon-id")
+	REFERENCES "routing_zones"("rot_zon-id")
+GO
+ALTER TABLE "transit_locations"
+	ADD CONSTRAINT "rot_zon-tra_loc"
+	FOREIGN KEY("rot_zon-id")
+	REFERENCES "routing_zones"("rot_zon-id")
+GO
+ALTER TABLE "user_details"
+	ADD CONSTRAINT "sec_cre-usr-det"
+	FOREIGN KEY("sec_cre-id")
+	REFERENCES "security_credentials"("sec_cre-id")
+GO
+ALTER TABLE "security_credentials"
+	ADD CONSTRAINT "sec_gro-sec_cre"
+	FOREIGN KEY("sec_gro-id")
+	REFERENCES "security_groups"("sec_gro-id")
+GO
+ALTER TABLE "transit_locations"
+	ADD CONSTRAINT "tra_typ-tra_loc"
+	FOREIGN KEY("tra_typ-id")
+	REFERENCES "transit_type"("tra_typ-id")
+GO
+ALTER TABLE "user_address"
+	ADD CONSTRAINT "usr_det-usr_adr"
+	FOREIGN KEY("usr_det-id")
+	REFERENCES "user_details"("usr_det-id")
+GO
+ALTER TABLE "card_issued"
+	ADD CONSTRAINT "usr_det-car_iss"
+	FOREIGN KEY("usr_det-id")
+	REFERENCES "user_details"("usr_det-id")
+GO
+ALTER TABLE "card_retracted"
+	ADD CONSTRAINT "usr_det-car_ret"
+	FOREIGN KEY("usr_det-id")
+	REFERENCES "user_details"("usr_det-id")
+GO
+ALTER TABLE "vault_depositits"
+	ADD CONSTRAINT "usr_det-vau_dep"
+	FOREIGN KEY("usr_det-id")
+	REFERENCES "user_details"("usr_det-id")
+GO
+ALTER TABLE "vault_withdraws"
+	ADD CONSTRAINT "usr_det-vau-wit"
+	FOREIGN KEY("usr_det-id")
+	REFERENCES "user_details"("usr_det-id")
+GO

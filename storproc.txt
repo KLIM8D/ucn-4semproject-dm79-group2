@@ -1,0 +1,14 @@
+CREATE PROCEDURE [dbo].[getUserByUID] @param1 int OUTPUT AS
+BEGIN
+    DECLARE @tmpUserTbl TABLE("fname" varchar(256), "lname" varchar(256), "street" varchar(256), "zipcode" int, "city" varchar(256), "ssn" varchar(256), "phoneno" int, "email" varchar(256), "sec_group" varchar(256) ,"uname" varchar(256), "passwd" varchar(256), "created_timestamp" datetime, "is_active" bit)
+
+    INSERT INTO @tmpUserTbl ("fname", "lname", "street", "zipcode", "city", "ssn", "phoneno", "email", "sec_group", "uname", "passwd", "created_timestamp", "is_active")
+
+    SELECT "usr_det-fname", "usr_det-lname", "usr_adr-street", "geo_zip-code", "geo_zip-city", "usr_det-ssn", "usr_det-phoneno", "usr_det-email", "sec_gro-title", "sec_cre-uname", "sec_cre-passwd", "usr_det-timestamp", "usr_det-active" FROM user_details
+    INNER JOIN user_address ON user_details."usr_det-id" = user_address."usr_det-id"
+    INNER JOIN geo_zipcodes ON user_address."geo_zip-id" = geo_zipcodes."geo_zip-id"
+    INNER JOIN security_credentials ON user_details."sec_cre-id" = security_credentials."sec_cre-id"
+    INNER JOIN security_groups ON security_credentials."sec_gro-id" = security_groups."sec_gro-id"
+    WHERE user_details."usr_det-id" = @param1
+    SELECT * FROM @tmpUserTbl
+END
