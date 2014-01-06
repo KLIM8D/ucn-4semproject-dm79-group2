@@ -1,18 +1,18 @@
 Side 4:
-    1. linje, sidste sætning omformuleres 
-    4. linje, praktiker = praktikker
-    Sidste linje indledning. Velkommen ned på linje for sig.
+    1. linje, sidste sætning omformuleres [X]
+    4. linje, praktiker = praktikker [X]
+    Sidste linje indledning. Velkommen ned på linje for sig. [X]
     
 Side 5:
-    1. linje, omformuler første sætning
-    2. linje, udvikling = udviklings
-    10. linje, (om = fjern om
-    ", plandreven på" = og i stedet for ,
+    1. linje, omformuler første sætning [X]
+    2. linje, udvikling = udviklings [X]
+    10. linje, (om = fjern om [X]
+    ", plandreven på" = og i stedet for , [X]
 
-    4. afsnit, første sætning skal omfurmuler
+    4. afsnit, første sætning skal omfurmuler 
     
     Planlægning og kvalitet:
-        Erstat "Teams" med hold flere steder i første afsnit
+        Erstat "Teams" med hold flere steder i første afsnit [X]
 
 Side 6:
     1. afsnit, 3 linje: den = de ikke-funk..
