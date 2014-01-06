@@ -1,0 +1,80 @@
+Side 4:
+    1. linje, sidste sætning omformuleres 
+    4. linje, praktiker = praktikker
+    Sidste linje indledning. Velkommen ned på linje for sig.
+    
+Side 5:
+    1. linje, omformuler første sætning
+    2. linje, udvikling = udviklings
+    10. linje, (om = fjern om
+    ", plandreven på" = og i stedet for ,
+
+    4. afsnit, første sætning skal omfurmuler
+    
+    Planlægning og kvalitet:
+        Erstat "Teams" med hold flere steder i første afsnit
+
+Side 6:
+    1. afsnit, 3 linje: den = de ikke-funk..
+    2. afsnit, 1&2. linje omfurmuler 2. sætning
+
+    Krav og Ændringstyring, 1. linje: use-cases = use cases
+
+Side 8:
+    Konsekvenser af fejl:
+        1. linje, omfurmuler
+        4. linje, erstart . med ,
+
+Side 9:
+    1. afsnit, 2. linje "af problemer" = "af de problemer"
+    4. punkt "Tasks" = "Opgaver"
+
+Side 11:
+    Fjern underline ved "opfylde"
+
+Side 12:
+    1. linje "sig selv, en" = "sig selv, er en"
+    2. linje "den agile metoder" = "de agile metoder"
+
+    Punkt "Simpelhed": sener = senere
+
+Side 13:
+    Under "Kontinuerlig proces" Andet ord for repository
+
+Side 14:
+    Under punktet "Åbenhed": Første sætning, ikke forstået og 2. sætninger bekymring = bekymringer
+
+
+Side 19:
+    Under "Stories" indeholdt = indeholdte
+
+Side 20:
+    nøglen = nøgle
+    holdt = holdte
+
+Side 21:
+    på driveren = få driveren
+    storries = stories
+
+Side 23:
+    holdt = holdte
+
+Side 26:
+    sener = senere
+    default = standard
+
+Side 27:
+    Opgaven = opgave
+    Vedholdenhed data?
+    tyndeklienten = "den tyndeklient?"
+
+Side 28:
+    tyndeklienten = "den tyndeklient?"
+
+Side 29:
+    Første sætning, omformuler
+    "På den 3 underopgave"
+    genestimeret = re-estimeret
+
+Side 30:
+    dennes = deres (begge steder)
