@@ -9,72 +9,72 @@ Side 5:
     10. linje, (om = fjern om [X]
     ", plandreven på" = og i stedet for , [X]
 
-    4. afsnit, første sætning skal omfurmuler 
+    4. afsnit, første sætning skal omfurmuler [X]
     
     Planlægning og kvalitet:
         Erstat "Teams" med hold flere steder i første afsnit [X]
 
 Side 6:
-    1. afsnit, 3 linje: den = de ikke-funk..
-    2. afsnit, 1&2. linje omfurmuler 2. sætning
+    1. afsnit, 3 linje: den = de ikke-funk.. [X]
+    2. afsnit, 1&2. linje omfurmuler 2. sætning [X]
 
-    Krav og Ændringstyring, 1. linje: use-cases = use cases
+    Krav og Ændringstyring, 1. linje: use-cases = use cases [X]
 
 Side 8:
     Konsekvenser af fejl:
-        1. linje, omfurmuler
-        4. linje, erstart . med ,
+        1. linje, omfurmuler [X]
+        4. linje, erstart . med , [X]
 
 Side 9:
-    1. afsnit, 2. linje "af problemer" = "af de problemer"
-    4. punkt "Tasks" = "Opgaver"
+    1. afsnit, 2. linje "af problemer" = "af de problemer" [X]
+    4. punkt "Tasks" = "Opgaver" [X]
 
 Side 11:
-    Fjern underline ved "opfylde"
+    Fjern underline ved "opfylde" [X]
 
 Side 12:
-    1. linje "sig selv, en" = "sig selv, er en"
-    2. linje "den agile metoder" = "de agile metoder"
+    1. linje "sig selv, en" = "sig selv, er en" [X]
+    2. linje "den agile metoder" = "de agile metoder" [X]
 
-    Punkt "Simpelhed": sener = senere
+    Punkt "Simpelhed": sener = senere [X]
 
 Side 13:
-    Under "Kontinuerlig proces" Andet ord for repository
+    Under "Kontinuerlig proces" Andet ord for repository [X]
 
 Side 14:
-    Under punktet "Åbenhed": Første sætning, ikke forstået og 2. sætninger bekymring = bekymringer
+    Under punktet "Åbenhed": Første sætning, ikke forstået og 2. sætninger bekymring = bekymringer [X]
 
 
 Side 19:
-    Under "Stories" indeholdt = indeholdte
+    Under "Stories" indeholdt = indeholdte [X]
 
 Side 20:
-    nøglen = nøgle
-    holdt = holdte
+    nøglen = nøgle [X]
+    holdt = holdte [X]
 
 Side 21:
-    på driveren = få driveren
-    storries = stories
+    på driveren = få driveren [X]
+    storries = stories [X]
 
 Side 23:
-    holdt = holdte
+    holdt = holdte [X]
 
 Side 26:
-    sener = senere
-    default = standard
+    sener = senere [X]
+    default = standard [X]
 
 Side 27:
-    Opgaven = opgave
-    Vedholdenhed data?
-    tyndeklienten = "den tyndeklient?"
+    Opgaven = opgave [X]
+    Vedholdenhed data? [X]
+    tyndeklienten = "den tyndeklient?" [X]
 
 Side 28:
-    tyndeklienten = "den tyndeklient?"
+    tyndeklienten = "den tyndeklient?" [X]
 
 Side 29:
-    Første sætning, omformuler
-    "På den 3 underopgave"
-    genestimeret = re-estimeret
+    Første sætning, omformuler [X]
+    "På den 3 underopgave" [X]
+    genestimeret = re-estimeret [X]
 
 Side 30:
-    dennes = deres (begge steder)
+    dennes = deres (begge steder) [X]
